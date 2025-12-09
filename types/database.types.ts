@@ -441,6 +441,16 @@ export interface Database {
           is_published?: boolean;
         };
       };
+      research_topics: {
+        Row: ResearchTopic;
+        Insert: Omit<ResearchTopic, 'id' | 'created_at'> & { id?: string };
+        Update: Partial<Omit<ResearchTopic, 'id' | 'created_at'>>;
+      };
+      daily_research: {
+        Row: DailyResearch;
+        Insert: Omit<DailyResearch, 'id' | 'created_at'> & { id?: string };
+        Update: Partial<Omit<DailyResearch, 'id' | 'created_at'>>;
+      };
     };
     Functions: {
       has_active_subscription: {

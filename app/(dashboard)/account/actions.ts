@@ -20,6 +20,7 @@ export async function updateProfile(formData: FormData) {
 
   const { error } = await supabase
     .from('profiles')
+    // @ts-expect-error - Supabase types not fully configured for profiles update
     .update(updates)
     .eq('user_id', user.id);
 

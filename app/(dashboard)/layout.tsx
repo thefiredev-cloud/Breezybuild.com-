@@ -3,6 +3,9 @@ import { createClient } from '@/utils/supabase/server';
 import { DashboardHeader } from '@/components/layout/DashboardHeader';
 import type { SubscriptionTier } from '@/types/database.types';
 
+type ProfileRow = { full_name: string | null; avatar_url: string | null };
+type SubscriptionRow = { tier: string; status: string };
+
 export default async function DashboardLayout({
   children,
 }: {
@@ -28,7 +31,7 @@ export default async function DashboardLayout({
       .eq('user_id', user.id)
       .eq('status', 'active')
       .single(),
-  ]);
+  ]) as [{ data: ProfileRow | null }, { data: SubscriptionRow | null }];
 
   const profile = profileResult.data;
   const subscription = subscriptionResult.data;

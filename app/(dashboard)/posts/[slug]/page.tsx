@@ -46,7 +46,7 @@ export default async function PostPage({ params }: PostPageProps) {
       .select('tier, status')
       .eq('user_id', user!.id)
       .eq('status', 'active')
-      .single();
+      .single() as { data: { tier: string; status: string } | null };
 
     const hasPaidAccess = subscription?.tier && subscription.tier !== 'free';
 

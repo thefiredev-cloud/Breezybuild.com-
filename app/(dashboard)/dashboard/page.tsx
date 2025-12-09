@@ -5,6 +5,11 @@ import { QuickLinksSection } from '@/components/dashboard/QuickLinksSection';
 import { SubscriptionStatusCard } from '@/components/dashboard/SubscriptionStatusCard';
 import type { SubscriptionTier } from '@/types/database.types';
 
+type ProfileRow = { full_name: string | null };
+type SubscriptionRow = { tier: string; status: string };
+type PostRow = { id: string; title: string; slug: string; excerpt: string | null; category: string; published_at: string | null };
+type ResearchRow = { id: string; title: string; summary: string | null; research_date: string; topic: { name: string } | null };
+
 export default async function DashboardPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -35,7 +40,12 @@ export default async function DashboardPage() {
       .eq('is_published', true)
       .order('research_date', { ascending: false })
       .limit(3),
-  ]);
+  ]) as [
+    { data: ProfileRow | null },
+    { data: SubscriptionRow | null },
+    { data: PostRow | null },
+    { data: ResearchRow[] | null }
+  ];
 
   const profile = profileResult.data;
   const subscription = subscriptionResult.data;
@@ -76,7 +86,7 @@ export default async function DashboardPage() {
         {/* Today's Research */}
         <div className="space-y-4">
           {research && research.length > 0 ? (
-            research.slice(0, 2).map((item: any) => (
+            research.slice(0, 2).map((item) => (
               <ContentPreviewCard
                 key={item.id}
                 type="research"
