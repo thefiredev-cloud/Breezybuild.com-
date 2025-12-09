@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --gradient-warm-start: #fbbf24;
+    --gradient-warm-mid: #f97316;
+    --gradient-warm-end: #ea580c;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-sand-900 antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans tracking-tight;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-cta text-white font-semibold rounded-xl
+           shadow-warm hover:shadow-warm-lg transition-all duration-200
+           hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-white text-breezy-600 font-semibold rounded-xl
+           border-2 border-breezy-200 hover:border-breezy-400
+           transition-all duration-200;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-text bg-clip-text text-transparent;
+  }
+
+  .card-warm {
+    @apply bg-white rounded-2xl border border-breezy-100
+           shadow-sm hover:shadow-warm transition-shadow duration-200;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32 px-4 md:px-6;
+  }
+
+  .container-tight {
+    @apply max-w-4xl mx-auto;
+  }
+
+  .container-wide {
+    @apply max-w-6xl mx-auto;
+  }
+}
+
+@layer utilities {
+  .animate-delay-100 { animation-delay: 100ms; }
+  .animate-delay-200 { animation-delay: 200ms; }
+  .animate-delay-300 { animation-delay: 300ms; }
+  .animate-delay-400 { animation-delay: 400ms; }
+  .animate-delay-500 { animation-delay: 500ms; }
+}
