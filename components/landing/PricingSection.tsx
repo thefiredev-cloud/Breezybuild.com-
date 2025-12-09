@@ -3,13 +3,18 @@
 import { PricingCard } from '@/components/ui/PricingCard';
 import { PRICING } from '@/lib/constants';
 
+const PAYMENT_LINKS: Record<string, string> = {
+  Starter: 'https://buy.stripe.com/9B628l4M6gNG8JS0U0eAg00',
+  Pro: 'https://buy.stripe.com/14AeV77Yi40U4tC6ekeAg01',
+  Enterprise: 'https://buy.stripe.com/dRm9AN6Uebtm3pyeKQeAg02',
+};
+
 export function PricingSection() {
   const handleSelect = (tierName: string) => {
     if (tierName === 'Free') {
-      document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      // TODO: Integrate with Stripe checkout
-      console.log(`Selected tier: ${tierName}`);
+      window.location.href = '/login';
+    } else if (PAYMENT_LINKS[tierName]) {
+      window.location.href = PAYMENT_LINKS[tierName];
     }
   };
 
