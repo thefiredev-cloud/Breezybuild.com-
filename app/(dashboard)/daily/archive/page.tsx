@@ -2,6 +2,8 @@ import { createClient } from '@/utils/supabase/server';
 import { ResearchCard } from '@/components/daily/ResearchCard';
 import { isResearchFromToday } from '@/lib/auth';
 
+export const dynamic = 'force-dynamic';
+
 type ResearchRow = {
   id: string;
   title: string;

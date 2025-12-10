@@ -4,6 +4,8 @@ import { PostView } from '@/components/posts/PostView';
 import { ArchiveGateView } from '@/components/posts/ArchiveGateView';
 import { isPostFromToday } from '@/lib/auth';
 
+export const dynamic = 'force-dynamic';
+
 type Post = {
   id: string;
   title: string;

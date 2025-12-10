@@ -2,6 +2,8 @@ import { createClient } from '@/utils/supabase/server';
 import { ResearchView } from '@/components/daily/ResearchView';
 import type { DailyResearchWithTopic } from '@/types/database.types';
 
+export const dynamic = 'force-dynamic';
+
 type ResearchRow = {
   id: string;
   topic_id: string;

@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation';
 import { createClient } from '@/utils/supabase/server';
 import { PostForm } from '@/components/admin/PostForm';
 
+export const dynamic = 'force-dynamic';
+
 interface EditPostPageProps {
   params: Promise<{ id: string }>;
 }

@@ -11,6 +11,8 @@ import { FooterSection } from '@/components/landing/FooterSection';
 import { isResearchFromToday } from '@/lib/auth';
 import type { DailyResearchWithTopic } from '@/types/database.types';
 
+export const dynamic = 'force-dynamic';
+
 type ResearchRow = {
   id: string;
   topic_id: string;

@@ -3,6 +3,8 @@ import { createClient } from '@/utils/supabase/server';
 import { DashboardHeader } from '@/components/layout/DashboardHeader';
 import type { SubscriptionTier } from '@/types/database.types';
 
+export const dynamic = 'force-dynamic';
+
 type ProfileRow = { full_name: string | null; avatar_url: string | null };
 type SubscriptionRow = { tier: string; status: string };
 

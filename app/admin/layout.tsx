@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { createClient } from '@/utils/supabase/server';
 import { isAdmin } from '@/lib/auth';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminLayout({
   children,
 }: {

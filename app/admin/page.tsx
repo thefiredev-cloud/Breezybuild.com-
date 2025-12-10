@@ -3,6 +3,8 @@ import { createClient } from '@/utils/supabase/server';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 
+export const dynamic = 'force-dynamic';
+
 type Post = {
   id: string;
   title: string;

@@ -16,21 +16,15 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
 
 // Admin client for server-side operations requiring elevated privileges
 // IMPORTANT: Only use this server-side, never expose to client
-export const supabaseAdmin = createClient<Database>(
-  supabaseUrl,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-  {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false
-    }
-  }
-);
-
-// Validate admin client has service role key
-if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
-  console.warn('SUPABASE_SERVICE_ROLE_KEY not set - admin operations will fail');
-}
+const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+export const supabaseAdmin = serviceRoleKey
+  ? createClient<Database>(supabaseUrl, serviceRoleKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false
+      }
+    })
+  : null;
 
 // Types for filtering
 import type { ToolContent, ToolCategory } from '../types/tool-content';

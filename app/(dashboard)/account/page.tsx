@@ -4,6 +4,8 @@ import { SubscriptionCard } from '@/components/account/SubscriptionCard';
 import { DangerZone } from '@/components/account/DangerZone';
 import type { SubscriptionTier } from '@/types/database.types';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AccountPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();

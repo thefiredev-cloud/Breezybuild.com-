@@ -3,6 +3,8 @@ import { createClient } from '@/utils/supabase/server';
 import { PostView } from '@/components/posts/PostView';
 import { Button } from '@/components/ui/Button';
 
+export const dynamic = 'force-dynamic';
+
 export default async function PostsPage() {
   const supabase = await createClient();
 

@@ -2,6 +2,8 @@ import { createClient } from '@/utils/supabase/server';
 import { PostCard } from '@/components/posts/PostCard';
 import { isPostFromToday } from '@/lib/auth';
 
+export const dynamic = 'force-dynamic';
+
 type Post = {
   id: string;
   title: string;

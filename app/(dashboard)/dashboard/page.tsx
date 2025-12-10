@@ -5,6 +5,8 @@ import { QuickLinksSection } from '@/components/dashboard/QuickLinksSection';
 import { SubscriptionStatusCard } from '@/components/dashboard/SubscriptionStatusCard';
 import type { SubscriptionTier } from '@/types/database.types';
 
+export const dynamic = 'force-dynamic';
+
 type ProfileRow = { full_name: string | null };
 type SubscriptionRow = { tier: string; status: string };
 type PostRow = { id: string; title: string; slug: string; excerpt: string | null; category: string; published_at: string | null };
