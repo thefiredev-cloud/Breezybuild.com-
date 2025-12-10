@@ -43,16 +43,8 @@
   node_bundler = "esbuild"
   # Increase timeout for content generation (max 10 seconds for background, 26 seconds for scheduled)
 
-[[functions."generate-tool-content"]]
-  # Background function - no schedule, invoked by daily-content-pipeline
-  included_files = ["netlify/functions/generate-tool-content.mts"]
-
-[[functions."daily-content-pipeline"]]
-  # Scheduled function - runs daily at 6 AM UTC
+[functions."daily-content-pipeline"]
   schedule = "0 6 * * *"
-  included_files = ["netlify/functions/daily-content-pipeline.mts"]
 
-[[functions."retry-failed-content"]]
-  # Scheduled function - runs every 4 hours
+[functions."retry-failed-content"]
   schedule = "0 */4 * * *"
-  included_files = ["netlify/functions/retry-failed-content.mts"]
