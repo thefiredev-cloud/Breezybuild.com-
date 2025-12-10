@@ -513,6 +513,18 @@ export interface DailyResearch {
   raw_perplexity: Record<string, unknown> | null;
   is_published: boolean;
   created_at: string;
+  // Tool of the Day score fields
+  opportunity_score: number;
+  problem_score: number;
+  feasibility_score: number;
+  timing_score: number;
+  revenue_potential: string;
+  execution_difficulty: number;
+  go_to_market_score: number;
+  tags: string[];
+  tool_url: string | null;
+  tool_pricing: string | null;
+  is_featured: boolean;
 }
 
 export interface DailyResearchWithTopic extends DailyResearch {
