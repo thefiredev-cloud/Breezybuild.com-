@@ -1,0 +1,58 @@
+# Netlify Configuration for Next.js
+# See: https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # Build command for Next.js
+  command = "npm run build"
+  # Publish directory - Next.js static export location
+  publish = ".next"
+
+# Use the Next.js runtime for server-side features
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Environment variable context
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--legacy-peer-deps"
+
+# Production context
+[context.production]
+  command = "npm run build"
+
+# Preview/branch deploy context
+[context.deploy-preview]
+  command = "npm run build"
+
+# Headers for security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Note: API routes are handled by Next.js server handler via @netlify/plugin-nextjs
+# No manual redirects needed for /api/* routes
+
+# Netlify Functions Configuration
+[functions]
+  directory = "netlify/functions"
+  # Enable TypeScript/ESM support
+  node_bundler = "esbuild"
+  # Increase timeout for content generation (max 10 seconds for background, 26 seconds for scheduled)
+
+[[functions."generate-tool-content"]]
+  # Background function - no schedule, invoked by daily-content-pipeline
+  included_files = ["netlify/functions/generate-tool-content.mts"]
+
+[[functions."daily-content-pipeline"]]
+  # Scheduled function - runs daily at 6 AM UTC
+  schedule = "0 6 * * *"
+  included_files = ["netlify/functions/daily-content-pipeline.mts"]
+
+[[functions."retry-failed-content"]]
+  # Scheduled function - runs every 4 hours
+  schedule = "0 */4 * * *"
+  included_files = ["netlify/functions/retry-failed-content.mts"]
