@@ -1,17 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
-// Use env vars for Price IDs (configured in Netlify)
-const PRICE_IDS: Record<string, string | undefined> = {
-  starter: process.env.STRIPE_PRICE_STARTER,
-  pro: process.env.STRIPE_PRICE_PRO,
-  enterprise: process.env.STRIPE_PRICE_ENTERPRISE,
-};
-
 export async function POST(req: NextRequest) {
   try {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+    const PRICE_IDS: Record<string, string | undefined> = {
+      starter: process.env.STRIPE_PRICE_STARTER,
+      pro: process.env.STRIPE_PRICE_PRO,
+      enterprise: process.env.STRIPE_PRICE_ENTERPRISE,
+    };
+
     const { tier } = await req.json();
 
     if (!tier || !PRICE_IDS[tier]) {
