@@ -37,7 +37,7 @@ export function ToolOfDayHeader({ user, subscription }: ToolOfDayHeaderProps) {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-            <Link href="/daily/archive" className="text-sand-600 hover:text-sand-900 text-sm font-medium transition-colors">
+            <Link href="/browse" className="text-sand-600 hover:text-sand-900 text-sm font-medium transition-colors">
               Browse Tools
             </Link>
             <Link href="/pricing" className="text-sand-600 hover:text-sand-900 text-sm font-medium transition-colors">
@@ -124,7 +124,7 @@ export function ToolOfDayHeader({ user, subscription }: ToolOfDayHeaderProps) {
           <div className="md:hidden border-t border-sand-200 py-4">
             <nav className="space-y-2">
               <Link
-                href="/daily/archive"
+                href="/browse"
                 className="block px-4 py-2 text-sand-700 hover:bg-sand-50 rounded-lg"
               >
                 Browse Tools
