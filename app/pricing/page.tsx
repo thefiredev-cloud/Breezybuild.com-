@@ -1,14 +1,17 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
 import { CheckIcon } from '@heroicons/react/24/outline';
 import { BoltIcon } from '@heroicons/react/24/solid';
 
 const plans = [
   {
     name: 'Starter',
+    tier: 'starter',
     price: '$4.99',
     period: '/month',
     description: 'Perfect for getting started with AI dev tools',
-    href: 'https://buy.stripe.com/9B628l4M6gNG8JS0U0eAg00',
     features: [
       'Full Tool of the Day archive access',
       'Detailed tool analysis & scores',
@@ -19,10 +22,10 @@ const plans = [
   },
   {
     name: 'Pro',
+    tier: 'pro',
     price: '$14.99',
     period: '/month',
     description: 'For serious founders building with AI',
-    href: 'https://buy.stripe.com/14AeV77Yi40U4tC6ekeAg01',
     features: [
       'Everything in Starter',
       'All topic categories',
@@ -34,10 +37,10 @@ const plans = [
   },
   {
     name: 'Enterprise',
+    tier: 'enterprise',
     price: '$99',
     period: '/month',
     description: 'For teams and agencies',
-    href: 'https://buy.stripe.com/dRm9AN6Uebtm3pyeKQeAg02',
     features: [
       'Everything in Pro',
       'Team access (up to 10 seats)',
@@ -51,6 +54,31 @@ const plans = [
 ];
 
 export default function PricingPage() {
+  const [loadingTier, setLoadingTier] = useState<string | null>(null);
+
+  const handleCheckout = async (tier: string) => {
+    setLoadingTier(tier);
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tier }),
+      });
+
+      const data = await response.json();
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        console.error('No checkout URL returned');
+        setLoadingTier(null);
+      }
+    } catch (error) {
+      console.error('Checkout error:', error);
+      setLoadingTier(null);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-hero">
       {/* Header */}
@@ -140,16 +168,17 @@ export default function PricingPage() {
                 ))}
               </ul>
 
-              <Link
-                href={plan.href}
-                className={`block w-full py-3 px-4 text-center font-semibold rounded-lg transition-colors ${
+              <button
+                onClick={() => handleCheckout(plan.tier)}
+                disabled={loadingTier !== null}
+                className={`block w-full py-3 px-4 text-center font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
                   plan.highlighted
                     ? 'bg-white text-breezy-600 hover:bg-sand-50'
                     : 'bg-breezy-500 text-white hover:bg-breezy-600'
                 }`}
               >
-                Get Started
-              </Link>
+                {loadingTier === plan.tier ? 'Loading...' : 'Get Started'}
+              </button>
             </div>
           ))}
         </div>
