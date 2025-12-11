@@ -28,7 +28,7 @@ export default async function BrowsePage() {
       .select('tier, status')
       .eq('user_id', user.id)
       .eq('status', 'active')
-      .single();
+      .single() as { data: { tier: string; status: string } | null };
 
     hasPaidAccess = subscription?.tier !== undefined && subscription.tier !== 'free';
   }
