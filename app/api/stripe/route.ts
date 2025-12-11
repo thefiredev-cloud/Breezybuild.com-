@@ -109,8 +109,9 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     return;
   }
 
-  const stripeSubscription = await stripe.subscriptions.retrieve(subscriptionId);
-  const priceId = stripeSubscription.items.data[0]?.price.id;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const stripeSubscription = await stripe.subscriptions.retrieve(subscriptionId) as any;
+  const priceId = stripeSubscription.items?.data?.[0]?.price?.id || '';
   const tier = getTierFromPriceId(priceId);
 
   // Find or create user by email
@@ -167,11 +168,12 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   console.log(`Subscription created/updated for ${customerEmail}, tier: ${tier}`);
 }
 
-async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function handleSubscriptionUpdated(subscription: any) {
   console.log('Processing customer.subscription.updated:', subscription.id);
 
   const status = mapStripeStatus(subscription.status);
-  const priceId = subscription.items.data[0]?.price.id;
+  const priceId = subscription.items?.data?.[0]?.price?.id || '';
   const tier = getTierFromPriceId(priceId);
 
   const { error } = await supabaseAdmin
@@ -196,7 +198,8 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
   console.log(`Subscription ${subscription.id} updated to status: ${status}`);
 }
 
-async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function handleSubscriptionDeleted(subscription: any) {
   console.log('Processing customer.subscription.deleted:', subscription.id);
 
   const { error } = await supabaseAdmin
@@ -216,7 +219,8 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
   console.log(`Subscription ${subscription.id} cancelled`);
 }
 
-async function handlePaymentSucceeded(invoice: Stripe.Invoice) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function handlePaymentSucceeded(invoice: any) {
   console.log('Processing invoice.payment_succeeded:', invoice.id);
 
   if (!invoice.subscription) return;
@@ -254,7 +258,8 @@ async function handlePaymentSucceeded(invoice: Stripe.Invoice) {
   console.log(`Payment recorded for invoice ${invoice.id}`);
 }
 
-async function handlePaymentFailed(invoice: Stripe.Invoice) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function handlePaymentFailed(invoice: any) {
   console.log('Processing invoice.payment_failed:', invoice.id);
 
   if (!invoice.subscription) return;
