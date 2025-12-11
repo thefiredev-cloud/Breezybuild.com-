@@ -2,17 +2,36 @@ import { createClient } from '@/utils/supabase/server';
 
 export const dynamic = 'force-dynamic';
 
+type TopicRow = {
+  id: string;
+  name: string;
+  slug: string;
+  is_active: boolean;
+  priority: number;
+};
+
+type ResearchRow = {
+  id: string;
+  title: string;
+  research_date: string;
+  is_published: boolean;
+  topic_id: string | null;
+  created_at: string;
+};
+
 export default async function DebugDataPage() {
   const supabase = await createClient();
 
   // Get ALL research_topics (not filtered by is_active)
-  const { data: topics, error: topicsError } = await supabase
+  const { data: topicsData, error: topicsError } = await supabase
     .from('research_topics')
     .select('*')
     .order('name');
 
+  const topics = topicsData as TopicRow[] | null;
+
   // Get ALL daily_research (both published and unpublished)
-  const { data: research, error: researchError } = await supabase
+  const { data: researchData, error: researchError } = await supabase
     .from('daily_research')
     .select(`
       id,
@@ -23,6 +42,8 @@ export default async function DebugDataPage() {
       created_at
     `)
     .order('created_at', { ascending: false });
+
+  const research = researchData as ResearchRow[] | null;
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
