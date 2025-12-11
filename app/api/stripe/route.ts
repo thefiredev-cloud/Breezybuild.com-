@@ -1,3 +1,4 @@
+// Stripe webhook handler for subscription sync
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
