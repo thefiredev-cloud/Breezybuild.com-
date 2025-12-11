@@ -121,13 +121,15 @@ export default async function BrowsePage() {
 
           {research && research.length > 0 ? (
             <div className="space-y-4">
-              {research.map((item) => {
-                const isToday = isResearchFromToday(item.research_date);
-                const locked = !isToday && !hasPaidAccess;
-                return (
-                  <ResearchCard key={item.id} research={item} locked={locked} />
-                );
-              })}
+              {research
+                .filter((item) => item.topic) // Filter out items with null topics
+                .map((item) => {
+                  const isToday = isResearchFromToday(item.research_date);
+                  const locked = !isToday && !hasPaidAccess;
+                  return (
+                    <ResearchCard key={item.id} research={item} locked={locked} />
+                  );
+                })}
             </div>
           ) : (
             <div className="text-center py-16">

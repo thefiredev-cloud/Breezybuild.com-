@@ -33,7 +33,7 @@ export function ResearchCard({ research, locked = false }: ResearchCardProps) {
       onClick={locked ? (e) => e.preventDefault() : undefined}
     >
       <div className="flex items-center gap-3 mb-3">
-        <Badge variant="outline">{research.topic.name}</Badge>
+        <Badge variant="outline">{research.topic?.name ?? 'Uncategorized'}</Badge>
         <span className="text-sm text-sand-500">{formattedDate}</span>
         {locked && (
           <span className="ml-auto flex items-center gap-1 text-sm text-sand-500">
