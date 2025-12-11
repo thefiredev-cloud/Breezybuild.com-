@@ -1,9 +1,9 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Bars3Icon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
-import { BoltIcon } from '@heroicons/react/24/solid';
 
 interface ToolOfDayHeaderProps {
   user?: {
@@ -26,8 +26,14 @@ export function ToolOfDayHeader({ user, subscription }: ToolOfDayHeaderProps) {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-breezy-500 rounded-lg flex items-center justify-center">
-              <BoltIcon className="w-5 h-5 text-white" />
+            <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-lg shadow-orange-500/20">
+              <Image
+                src="/logo.jpg"
+                alt="Breezy Build Logo"
+                fill
+                className="object-cover"
+                sizes="36px"
+              />
             </div>
             <span className="text-xl font-bold">
               <span className="text-breezy-600">Breezy</span>

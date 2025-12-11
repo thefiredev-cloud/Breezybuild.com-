@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
@@ -52,10 +53,14 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-gradient-cta flex items-center justify-center shadow-warm">
-              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
+            <div className="relative w-10 h-10 rounded-xl overflow-hidden shadow-lg shadow-orange-500/20">
+              <Image
+                src="/logo.jpg"
+                alt="Breezy Build Logo"
+                fill
+                className="object-cover"
+                sizes="40px"
+              />
             </div>
             <span className="text-2xl font-bold text-sand-900">
               Breezy<span className="text-breezy-500">Build</span>
