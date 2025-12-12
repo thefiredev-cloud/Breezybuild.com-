@@ -31,7 +31,7 @@ export function ToolOfDayHeader({ user, subscription }: ToolOfDayHeaderProps) {
                 src="/logo.jpg"
                 alt="Breezy Build Logo"
                 fill
-                className="object-cover"
+                className="object-cover animate-spin-slow"
                 sizes="36px"
               />
             </div>
