@@ -66,6 +66,7 @@ const config: Config = {
         'scale-in': 'scaleIn 0.3s ease-out',
         'check-draw': 'checkDraw 0.6s ease-out forwards',
         'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
+        'spin-slow': 'spinSlow 30s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -87,6 +88,10 @@ const config: Config = {
         pulseSoft: {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0.7' },
+        },
+        spinSlow: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
         },
       },
       boxShadow: {
