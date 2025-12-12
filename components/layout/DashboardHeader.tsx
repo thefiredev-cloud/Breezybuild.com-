@@ -36,7 +36,7 @@ export function DashboardHeader({ user, subscription }: DashboardHeaderProps) {
             />
           </div>
           <span className="text-xl font-bold text-sand-900">
-            Breezy<span className="text-breezy-500">Build</span>
+            breezy<span className="text-breezy-500">build</span><span className="text-sand-500">.com</span>
           </span>
         </Link>
 

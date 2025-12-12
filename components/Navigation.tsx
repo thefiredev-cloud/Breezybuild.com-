@@ -23,7 +23,7 @@ export default function Navigation() {
               />
             </div>
             <span className="font-semibold text-xl text-stone-900 dark:text-white tracking-tight">
-              Breezy<span className="text-orange-500">Build</span>
+              breezy<span className="text-orange-500">build</span><span className="text-stone-500">.com</span>
             </span>
           </Link>
 
