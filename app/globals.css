@@ -63,4 +63,53 @@
   .animate-delay-300 { animation-delay: 300ms; }
   .animate-delay-400 { animation-delay: 400ms; }
   .animate-delay-500 { animation-delay: 500ms; }
+
+  /* Toast animations (slide from right) */
+  .animate-slide-in {
+    animation: slideInRight 0.3s ease-out;
+  }
+
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  /* Mobile sidebar animation (slide from left) */
+  .animate-slide-in-left {
+    animation: slideInLeft 0.3s ease-out;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  /* Skeleton loading animation */
+  .animate-skeleton {
+    animation: skeleton 1.5s ease-in-out infinite;
+    background: linear-gradient(
+      90deg,
+      theme('colors.sand.100') 0%,
+      theme('colors.sand.200') 50%,
+      theme('colors.sand.100') 100%
+    );
+    background-size: 200% 100%;
+  }
+
+  @keyframes skeleton {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
 }

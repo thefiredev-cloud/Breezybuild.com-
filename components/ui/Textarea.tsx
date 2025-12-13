@@ -1,34 +1,34 @@
 'use client';
 
-import { InputHTMLAttributes, forwardRef, useId } from 'react';
+import { TextareaHTMLAttributes, forwardRef, useId } from 'react';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: string;
   label?: string;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ error, label, className = '', id, ...props }, ref) => {
     const generatedId = useId();
-    const inputId = id || generatedId;
-    const errorId = `${inputId}-error`;
+    const textareaId = id || generatedId;
+    const errorId = `${textareaId}-error`;
 
     return (
       <div className="w-full">
         {label && (
           <label
-            htmlFor={inputId}
+            htmlFor={textareaId}
             className="block text-sm font-medium text-sand-700 dark:text-sand-300 mb-1.5"
           >
             {label}
           </label>
         )}
-        <input
+        <textarea
           ref={ref}
-          id={inputId}
+          id={textareaId}
           className={`
             w-full px-4 py-3 rounded-xl border-2 transition-all duration-200
-            min-h-[44px]
+            resize-y min-h-[100px]
             ${error
               ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
               : 'border-sand-200 focus:border-breezy-400 focus:ring-breezy-200 dark:border-sand-600 dark:focus:border-breezy-500'
@@ -52,4 +52,4 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
-Input.displayName = 'Input';
+Textarea.displayName = 'Textarea';

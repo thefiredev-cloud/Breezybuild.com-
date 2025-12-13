@@ -2,6 +2,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
+import { logger } from '@/lib/logger';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
@@ -35,7 +36,7 @@ export async function POST(req: NextRequest) {
   const signature = req.headers.get('stripe-signature');
 
   if (!signature) {
-    console.error('No Stripe signature found');
+    logger.error('No Stripe signature found', { route: '/api/stripe' });
     return NextResponse.json({ error: 'No signature' }, { status: 400 });
   }
 
@@ -44,11 +45,11 @@ export async function POST(req: NextRequest) {
   try {
     event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
   } catch (err) {
-    console.error('Webhook signature verification failed:', err);
+    logger.error('Webhook signature verification failed', { error: String(err), route: '/api/stripe' });
     return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
   }
 
-  console.log(`Processing Stripe event: ${event.type}`);
+  logger.info(`Processing Stripe event: ${event.type}`, { eventType: event.type });
 
   try {
     switch (event.type) {
@@ -83,30 +84,30 @@ export async function POST(req: NextRequest) {
       }
 
       default:
-        console.log(`Unhandled event type: ${event.type}`);
+        logger.info(`Unhandled event type: ${event.type}`, { eventType: event.type });
     }
 
     return NextResponse.json({ received: true });
   } catch (error) {
-    console.error('Webhook handler error:', error);
+    logger.error('Webhook handler error', { error: String(error), route: '/api/stripe' });
     return NextResponse.json({ error: 'Webhook handler failed' }, { status: 500 });
   }
 }
 
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
-  console.log('Processing checkout.session.completed:', session.id);
+  logger.info('Processing checkout.session.completed', { sessionId: session.id });
 
   // Get customer email from session
   const customerEmail = session.customer_details?.email;
   if (!customerEmail) {
-    console.error('No customer email in session');
+    logger.error('No customer email in session', { sessionId: session.id });
     return;
   }
 
   // Get subscription details from Stripe
   const subscriptionId = session.subscription as string;
   if (!subscriptionId) {
-    console.log('No subscription in session (one-time payment)');
+    logger.info('No subscription in session (one-time payment)', { sessionId: session.id });
     return;
   }
 
@@ -127,7 +128,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   // If no profile exists, we'll store the subscription anyway
   // and link it when the user signs up with this email
   if (!userId) {
-    console.log(`No user found for ${customerEmail}, creating subscription record for later linking`);
+    logger.info('No user found, creating subscription record for later linking', { email: customerEmail });
     userId = `pending_${session.customer as string}`;
   }
 
@@ -162,16 +163,16 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     );
 
   if (subError) {
-    console.error('Error upserting subscription:', subError);
+    logger.error('Error upserting subscription', { error: subError.message, email: customerEmail });
     throw subError;
   }
 
-  console.log(`Subscription created/updated for ${customerEmail}, tier: ${tier}`);
+  logger.info('Subscription created/updated', { email: customerEmail, tier });
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handleSubscriptionUpdated(subscription: any) {
-  console.log('Processing customer.subscription.updated:', subscription.id);
+  logger.info('Processing customer.subscription.updated', { subscriptionId: subscription.id });
 
   const status = mapStripeStatus(subscription.status);
   const priceId = subscription.items?.data?.[0]?.price?.id || '';
@@ -192,16 +193,16 @@ async function handleSubscriptionUpdated(subscription: any) {
     .eq('stripe_subscription_id', subscription.id);
 
   if (error) {
-    console.error('Error updating subscription:', error);
+    logger.error('Error updating subscription', { error: error.message, subscriptionId: subscription.id });
     throw error;
   }
 
-  console.log(`Subscription ${subscription.id} updated to status: ${status}`);
+  logger.info('Subscription updated', { subscriptionId: subscription.id, status });
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handleSubscriptionDeleted(subscription: any) {
-  console.log('Processing customer.subscription.deleted:', subscription.id);
+  logger.info('Processing customer.subscription.deleted', { subscriptionId: subscription.id });
 
   const { error } = await supabaseAdmin
     .from('subscriptions')
@@ -213,16 +214,16 @@ async function handleSubscriptionDeleted(subscription: any) {
     .eq('stripe_subscription_id', subscription.id);
 
   if (error) {
-    console.error('Error cancelling subscription:', error);
+    logger.error('Error cancelling subscription', { error: error.message, subscriptionId: subscription.id });
     throw error;
   }
 
-  console.log(`Subscription ${subscription.id} cancelled`);
+  logger.info('Subscription cancelled', { subscriptionId: subscription.id });
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handlePaymentSucceeded(invoice: any) {
-  console.log('Processing invoice.payment_succeeded:', invoice.id);
+  logger.info('Processing invoice.payment_succeeded', { invoiceId: invoice.id });
 
   if (!invoice.subscription) return;
 
@@ -234,7 +235,7 @@ async function handlePaymentSucceeded(invoice: any) {
     .single();
 
   if (!sub) {
-    console.log('No subscription found for invoice');
+    logger.warn('No subscription found for invoice', { invoiceId: invoice.id });
     return;
   }
 
@@ -253,15 +254,15 @@ async function handlePaymentSucceeded(invoice: any) {
   });
 
   if (error) {
-    console.error('Error recording payment:', error);
+    logger.error('Error recording payment', { error: error.message, invoiceId: invoice.id });
   }
 
-  console.log(`Payment recorded for invoice ${invoice.id}`);
+  logger.info('Payment recorded', { invoiceId: invoice.id });
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handlePaymentFailed(invoice: any) {
-  console.log('Processing invoice.payment_failed:', invoice.id);
+  logger.info('Processing invoice.payment_failed', { invoiceId: invoice.id });
 
   if (!invoice.subscription) return;
 
@@ -272,10 +273,10 @@ async function handlePaymentFailed(invoice: any) {
     .eq('stripe_subscription_id', invoice.subscription as string);
 
   if (error) {
-    console.error('Error updating subscription to past_due:', error);
+    logger.error('Error updating subscription to past_due', { error: error.message, invoiceId: invoice.id });
   }
 
-  console.log(`Subscription marked as past_due for invoice ${invoice.id}`);
+  logger.info('Subscription marked as past_due', { invoiceId: invoice.id });
 }
 
 function mapStripeStatus(

@@ -451,6 +451,16 @@ export interface Database {
         Insert: Omit<DailyResearch, 'id' | 'created_at'> & { id?: string };
         Update: Partial<Omit<DailyResearch, 'id' | 'created_at'>>;
       };
+      skills: {
+        Row: SkillRecord;
+        Insert: SkillRecordInsert;
+        Update: SkillRecordUpdate;
+      };
+      admin_activity_logs: {
+        Row: AdminActivityLog;
+        Insert: AdminActivityLogInsert;
+        Update: never;
+      };
     };
     Functions: {
       has_active_subscription: {
@@ -530,3 +540,66 @@ export interface DailyResearch {
 export interface DailyResearchWithTopic extends DailyResearch {
   topic: ResearchTopic;
 }
+
+// =====================================================
+// SKILLS TYPES
+// =====================================================
+
+export type SkillStorageLocation = 'global' | 'local';
+
+export type AdminActivityAction =
+  | 'created'
+  | 'updated'
+  | 'deleted'
+  | 'published'
+  | 'unpublished'
+  | 'synced'
+  | 'activated'
+  | 'deactivated';
+
+export type AdminActivityEntityType =
+  | 'skill'
+  | 'topic'
+  | 'post'
+  | 'pipeline'
+  | 'settings';
+
+export interface SkillRecord {
+  id: string;
+  slug: string;
+  name: string;
+  description: string;
+  allowed_tools: string[] | null;
+  markdown_content: string;
+  tags: string[];
+  storage_location: SkillStorageLocation;
+  file_path: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+  last_synced_at: string | null;
+}
+
+export interface AdminActivityLog {
+  id: string;
+  user_email: string;
+  action: AdminActivityAction;
+  entity_type: AdminActivityEntityType;
+  entity_id: string | null;
+  entity_name: string | null;
+  changes: Record<string, unknown> | null;
+  metadata: Record<string, unknown> | null;
+  ip_address: string | null;
+  user_agent: string | null;
+  created_at: string;
+}
+
+export type SkillRecordInsert = Omit<SkillRecord, 'id' | 'created_at' | 'updated_at'> & {
+  id?: string;
+};
+
+export type SkillRecordUpdate = Partial<Omit<SkillRecord, 'id' | 'created_at' | 'updated_at'>>;
+
+export type AdminActivityLogInsert = Omit<AdminActivityLog, 'id' | 'created_at'> & {
+  id?: string;
+};
