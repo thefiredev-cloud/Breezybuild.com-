@@ -37,3 +37,6 @@ next-env.d.ts
 
 # Misc
 *.log
+
+# Local Netlify folder
+.netlify

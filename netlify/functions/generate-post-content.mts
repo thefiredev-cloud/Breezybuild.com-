@@ -119,13 +119,13 @@ Focus on actionable advice for builders. Skip the theory - they want to know wha
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'sonar-pro',
+      model: 'sonar', // Fast model for Lambda timeout constraints
       messages: [
         { role: 'system', content: systemPrompt },
         { role: 'user', content: userPrompt }
       ],
-      temperature: 0.7, // Higher for more natural variation
-      max_tokens: 4000,
+      temperature: 0.7,
+      max_tokens: 2500, // Reduced for speed
     }),
   });
 
