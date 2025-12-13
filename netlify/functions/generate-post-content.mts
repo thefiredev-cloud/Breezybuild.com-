@@ -78,20 +78,50 @@ Be direct. Be useful. Skip the fluff.`;
 
   const userPrompt = `Research "${topic.name}" and create a blog post for non-technical founders building with AI.
 
-IMPORTANT WRITING STYLE:
+WRITING STYLE:
 - Write naturally like a human. Use contractions (don't, won't, it's).
 - Vary sentence length. Mix short punchy sentences with longer ones.
-- Occasionally start sentences with "And" or "But" for flow.
 - Be direct, not fluffy. Get to the point.
 - Include real examples and specific numbers when possible.
-- Avoid phrases like "In today's fast-paced world" or "In conclusion".
 
-RETURN ONLY VALID JSON (no markdown, no code blocks):
+CRITICAL MARKDOWN FORMATTING RULES FOR THE "content" FIELD:
+The content MUST use proper markdown syntax. Follow these rules exactly:
+
+1. HEADERS: Use ## for main sections, ### for subsections. NEVER use **bold** as a header.
+   CORRECT: ## Why This Matters
+   WRONG: **Why This Matters**
+
+2. BULLET LISTS: Use - or * with a space before each item.
+   CORRECT:
+   - First point here
+   - Second point here
+   WRONG: First point here (no bullet)
+
+3. NUMBERED LISTS: Use 1. 2. 3. format.
+   CORRECT:
+   1. First step
+   2. Second step
+
+4. CODE: Use triple backticks with language for code blocks.
+   CORRECT:
+   \`\`\`javascript
+   const x = 1;
+   \`\`\`
+
+5. TABLES: Use proper markdown table syntax with pipes and dashes.
+   CORRECT:
+   | Tool | Price | Use Case |
+   |------|-------|----------|
+   | Lovable | $29 | Apps |
+
+6. STRUCTURE: Every post MUST have 3-5 ## sections with clear headers.
+
+RETURN ONLY VALID JSON (no markdown code blocks around the JSON):
 {
   "title": "Catchy but not clickbait title",
   "slug": "${topic.slug}",
   "excerpt": "Hook in under 150 chars. Make them want to read more.",
-  "content": "800-1200 words in markdown. Use ## headers, bullet points, maybe a code snippet if relevant. Make it scannable.",
+  "content": "800-1200 words using PROPER MARKDOWN as described above. Must have ## headers, - bullet lists, and be scannable.",
   "category": "${topic.category}",
   "tagline": "One-sentence summary of the main insight",
   "key_takeaways": [
@@ -110,7 +140,7 @@ RETURN ONLY VALID JSON (no markdown, no code blocks):
   ]
 }
 
-Focus on actionable advice for builders. Skip the theory - they want to know what to DO.`;
+Focus on actionable advice for builders. Skip theory - they want to know what to DO.`;
 
   const response = await fetch('https://api.perplexity.ai/chat/completions', {
     method: 'POST',
