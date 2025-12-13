@@ -13,6 +13,10 @@ type Post = {
   content: string;
   excerpt: string | null;
   category: string;
+  tagline: string | null;
+  key_takeaways: string[] | null;
+  practical_tips: string[] | null;
+  common_mistakes: string[] | null;
   published_at: string | null;
   is_published: boolean;
 };
