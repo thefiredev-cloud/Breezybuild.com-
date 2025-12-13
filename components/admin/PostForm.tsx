@@ -15,6 +15,14 @@ interface Post {
   category: string;
   is_published: boolean;
   published_at: string | null;
+  generated_by_ai?: boolean;
+  generation_status?: string;
+  quality_score?: number;
+  quality_issues?: string[];
+  tagline?: string;
+  key_takeaways?: string[];
+  practical_tips?: string[];
+  common_mistakes?: string[];
 }
 
 interface PostFormProps {
@@ -85,8 +93,38 @@ export function PostForm({ post, mode }: PostFormProps) {
     }
   };
 
+  const isAIGenerated = post?.generated_by_ai;
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-3xl">
+      {/* AI Generated Badge */}
+      {isAIGenerated && (
+        <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-5 h-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+            <span className="font-medium text-purple-800">AI-Generated Post</span>
+            {post.quality_score && (
+              <span className="ml-auto text-sm text-purple-600">
+                Quality Score: {post.quality_score}/10
+              </span>
+            )}
+          </div>
+          {post.quality_issues && post.quality_issues.length > 0 && (
+            <div className="text-sm text-purple-700">
+              <span className="font-medium">Review notes:</span>{' '}
+              {post.quality_issues.join(', ')}
+            </div>
+          )}
+          {post.generation_status === 'draft' && (
+            <p className="text-sm text-purple-600 mt-2">
+              This post was saved as a draft because it didn&apos;t pass quality checks. Review and edit before publishing.
+            </p>
+          )}
+        </div>
+      )}
+
       {error && (
         <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
           {error}
