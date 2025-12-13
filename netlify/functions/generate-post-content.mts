@@ -252,7 +252,7 @@ APPROVAL RULES:
 // ============================================
 // Pipeline Run Logger
 // ============================================
-async function createPipelineRun(topicName?: string) {
+async function createPipelineRun() {
   const supabase = getSupabaseServiceClient();
 
   const { data, error } = await supabase
@@ -261,7 +261,6 @@ async function createPipelineRun(topicName?: string) {
       run_type: 'post_generation',
       status: 'started',
       started_at: new Date().toISOString(),
-      topic_processed: topicName || null,
     }])
     .select()
     .single();
@@ -278,7 +277,8 @@ async function updatePipelineRun(
   runId: string,
   status: 'completed' | 'failed',
   updates: {
-    contentGenerated?: boolean;
+    topicId?: string;
+    contentId?: string;
     errorType?: string;
     errorMessage?: string;
     tokensUsed?: number;
@@ -291,7 +291,8 @@ async function updatePipelineRun(
     .update({
       status,
       completed_at: new Date().toISOString(),
-      content_generated: updates.contentGenerated || false,
+      topic_processed: updates.topicId || null,
+      content_generated: updates.contentId || null,
       error_type: updates.errorType || null,
       error_message: updates.errorMessage || null,
       perplexity_tokens_used: updates.tokensUsed || null,
@@ -352,11 +353,11 @@ export default async function handler(request: Request, context: Context) {
 
     console.log(`[Post Generator] Processing topic: ${topic.name}`);
 
-    // Update pipeline run with topic name
+    // Update pipeline run with topic ID
     if (pipelineRun) {
       await supabase
         .from('pipeline_runs')
-        .update({ topic_processed: topic.name })
+        .update({ topic_processed: topic.id })
         .eq('id', pipelineRun.id);
     }
 
@@ -435,7 +436,7 @@ export default async function handler(request: Request, context: Context) {
     // Mark pipeline run as completed
     if (pipelineRun) {
       await updatePipelineRun(pipelineRun.id, 'completed', {
-        contentGenerated: true,
+        topicId: topic.id,
         tokensUsed: totalTokens,
       });
     }
