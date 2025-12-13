@@ -1,4 +1,4 @@
-import type { Config, Context } from '@netlify/functions';
+import type { Context } from '@netlify/functions';
 import { createClient } from '@supabase/supabase-js';
 
 // ============================================
@@ -482,9 +482,3 @@ export default async function handler(request: Request, context: Context) {
   }
 }
 
-// ============================================
-// Netlify Function Config - Extended Timeout
-// ============================================
-export const config: Config = {
-  path: '/.netlify/functions/generate-post-content',
-};
