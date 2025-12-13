@@ -5,14 +5,6 @@ export function cn(...inputs: ClassValue[]) {
   return clsx(inputs);
 }
 
-// Simple clsx implementation if the package isn't installed
-function clsx(...inputs: ClassValue[]): string {
-  return inputs
-    .flat()
-    .filter((x) => typeof x === 'string' && x.trim() !== '')
-    .join(' ');
-}
-
 // Format date utilities
 export function formatDate(date: string | Date): string {
   return new Date(date).toLocaleDateString('en-US', {

@@ -4,20 +4,32 @@ import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
 import { logger } from '@/lib/logger';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+// Lazy-initialize clients to avoid build-time errors
+let _stripe: Stripe | null = null;
+let _supabaseAdmin: ReturnType<typeof createClient> | null = null;
 
-// Create admin client for webhook operations (bypasses RLS)
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-  {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
+function getStripe() {
+  if (!_stripe) {
+    _stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
   }
-);
+  return _stripe;
+}
+
+function getSupabaseAdmin() {
+  if (!_supabaseAdmin) {
+    _supabaseAdmin = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      {
+        auth: {
+          autoRefreshToken: false,
+          persistSession: false,
+        },
+      }
+    );
+  }
+  return _supabaseAdmin;
+}
 
 // Map Stripe price IDs to tiers
 function getTierFromPriceId(priceId: string): 'free' | 'pro' | 'enterprise' {
@@ -34,6 +46,7 @@ function getTierFromPriceId(priceId: string): 'free' | 'pro' | 'enterprise' {
 export async function POST(req: NextRequest) {
   const body = await req.text();
   const signature = req.headers.get('stripe-signature');
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
   if (!signature) {
     logger.error('No Stripe signature found', { route: '/api/stripe' });
@@ -43,7 +56,7 @@ export async function POST(req: NextRequest) {
   let event: Stripe.Event;
 
   try {
-    event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
+    event = getStripe().webhooks.constructEvent(body, signature, webhookSecret);
   } catch (err) {
     logger.error('Webhook signature verification failed', { error: String(err), route: '/api/stripe' });
     return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
@@ -112,16 +125,16 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const stripeSubscription = await stripe.subscriptions.retrieve(subscriptionId) as any;
+  const stripeSubscription = await getStripe().subscriptions.retrieve(subscriptionId) as any;
   const priceId = stripeSubscription.items?.data?.[0]?.price?.id || '';
   const tier = getTierFromPriceId(priceId);
 
   // Find or create user by email
-  const { data: profile } = await supabaseAdmin
+  const { data: profile } = await getSupabaseAdmin()
     .from('profiles')
     .select('user_id')
     .eq('email', customerEmail)
-    .single();
+    .single() as { data: { user_id: string } | null };
 
   let userId = profile?.user_id;
 
@@ -133,16 +146,16 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   }
 
   // Get or create subscription tier ID
-  const { data: tierConfig } = await supabaseAdmin
+  const { data: tierConfig } = await getSupabaseAdmin()
     .from('subscription_tiers')
     .select('id')
     .eq('tier', tier)
-    .single();
+    .single() as { data: { id: string } | null };
 
   const tierId = tierConfig?.id || crypto.randomUUID();
 
   // Upsert subscription
-  const { error: subError } = await supabaseAdmin
+  const { error: subError } = await getSupabaseAdmin()
     .from('subscriptions')
     .upsert(
       {
@@ -156,7 +169,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
         stripe_customer_id: session.customer as string,
         stripe_subscription_id: subscriptionId,
         auto_renew: !stripeSubscription.cancel_at_period_end,
-      },
+      } as never,
       {
         onConflict: 'stripe_subscription_id',
       }
@@ -178,7 +191,7 @@ async function handleSubscriptionUpdated(subscription: any) {
   const priceId = subscription.items?.data?.[0]?.price?.id || '';
   const tier = getTierFromPriceId(priceId);
 
-  const { error } = await supabaseAdmin
+  const { error } = await getSupabaseAdmin()
     .from('subscriptions')
     .update({
       status: status,
@@ -189,7 +202,7 @@ async function handleSubscriptionUpdated(subscription: any) {
       cancelled_at: subscription.canceled_at
         ? new Date(subscription.canceled_at * 1000).toISOString()
         : null,
-    })
+    } as never)
     .eq('stripe_subscription_id', subscription.id);
 
   if (error) {
@@ -204,13 +217,13 @@ async function handleSubscriptionUpdated(subscription: any) {
 async function handleSubscriptionDeleted(subscription: any) {
   logger.info('Processing customer.subscription.deleted', { subscriptionId: subscription.id });
 
-  const { error } = await supabaseAdmin
+  const { error } = await getSupabaseAdmin()
     .from('subscriptions')
     .update({
       status: 'cancelled',
       cancelled_at: new Date().toISOString(),
       auto_renew: false,
-    })
+    } as never)
     .eq('stripe_subscription_id', subscription.id);
 
   if (error) {
@@ -228,11 +241,11 @@ async function handlePaymentSucceeded(invoice: any) {
   if (!invoice.subscription) return;
 
   // Get the subscription to find user_id
-  const { data: sub } = await supabaseAdmin
+  const { data: sub } = await getSupabaseAdmin()
     .from('subscriptions')
     .select('user_id, id')
     .eq('stripe_subscription_id', invoice.subscription as string)
-    .single();
+    .single() as { data: { user_id: string; id: string } | null };
 
   if (!sub) {
     logger.warn('No subscription found for invoice', { invoiceId: invoice.id });
@@ -240,7 +253,7 @@ async function handlePaymentSucceeded(invoice: any) {
   }
 
   // Record payment
-  const { error } = await supabaseAdmin.from('payments').insert({
+  const { error } = await getSupabaseAdmin().from('payments').insert({
     subscription_id: sub.id,
     user_id: sub.user_id,
     amount: invoice.amount_paid / 100, // Convert from cents
@@ -251,7 +264,7 @@ async function handlePaymentSucceeded(invoice: any) {
     description: invoice.description || 'Subscription payment',
     receipt_url: invoice.hosted_invoice_url,
     paid_at: new Date().toISOString(),
-  });
+  } as never);
 
   if (error) {
     logger.error('Error recording payment', { error: error.message, invoiceId: invoice.id });
@@ -267,9 +280,9 @@ async function handlePaymentFailed(invoice: any) {
   if (!invoice.subscription) return;
 
   // Update subscription status to past_due
-  const { error } = await supabaseAdmin
+  const { error } = await getSupabaseAdmin()
     .from('subscriptions')
-    .update({ status: 'past_due' })
+    .update({ status: 'past_due' } as never)
     .eq('stripe_subscription_id', invoice.subscription as string);
 
   if (error) {

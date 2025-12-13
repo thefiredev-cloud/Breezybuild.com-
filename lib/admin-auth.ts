@@ -5,6 +5,10 @@ import { logger } from './logger';
 // Admin emails whitelist - can be configured via environment variable
 const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || '').split(',').filter(Boolean);
 
+interface ProfileData {
+  is_admin: boolean | null;
+}
+
 export interface AdminUser {
   id: string;
   email: string;
@@ -46,7 +50,7 @@ export async function getAdminUser(): Promise<AdminUser | null> {
     .from('profiles')
     .select('is_admin')
     .eq('id', user.id)
-    .single();
+    .single() as { data: ProfileData | null };
 
   const isAdmin = isWhitelisted || profile?.is_admin === true;
 

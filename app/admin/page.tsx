@@ -22,6 +22,31 @@ interface DashboardStats {
   publishedPosts: number;
 }
 
+interface SkillStats {
+  storage_location: string;
+  is_active: boolean;
+}
+
+interface PostStats {
+  is_published: boolean;
+}
+
+interface RecentSkill {
+  id: string;
+  slug: string;
+  name: string;
+  storage_location: string;
+  created_at: string;
+}
+
+interface RecentPost {
+  id: string;
+  title: string;
+  slug: string;
+  is_published: boolean;
+  created_at: string;
+}
+
 async function getDashboardStats(): Promise<DashboardStats> {
   const supabase = await createClient();
 
@@ -31,8 +56,8 @@ async function getDashboardStats(): Promise<DashboardStats> {
   // Get posts stats
   const { data: posts } = await supabase.from('posts').select('is_published');
 
-  const skillsData = skills || [];
-  const postsData = posts || [];
+  const skillsData = (skills || []) as SkillStats[];
+  const postsData = (posts || []) as PostStats[];
 
   return {
     totalSkills: skillsData.length,
@@ -44,24 +69,24 @@ async function getDashboardStats(): Promise<DashboardStats> {
   };
 }
 
-async function getRecentSkills() {
+async function getRecentSkills(): Promise<RecentSkill[]> {
   const supabase = await createClient();
   const { data } = await supabase
     .from('skills')
     .select('id, slug, name, storage_location, created_at')
     .order('created_at', { ascending: false })
     .limit(5);
-  return data || [];
+  return (data || []) as RecentSkill[];
 }
 
-async function getRecentPosts() {
+async function getRecentPosts(): Promise<RecentPost[]> {
   const supabase = await createClient();
   const { data } = await supabase
     .from('posts')
     .select('id, title, slug, is_published, created_at')
     .order('created_at', { ascending: false })
     .limit(5);
-  return data || [];
+  return (data || []) as RecentPost[];
 }
 
 export default async function AdminDashboardPage() {

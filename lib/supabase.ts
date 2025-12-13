@@ -1,30 +1,60 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '../types/database.types';
 
 // Re-export types for convenience
 export type { ToolContent, ToolCategory, ScoreValues } from '../types/tool-content';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+// Lazy initialization to avoid build-time errors when env vars not available
+let _supabase: SupabaseClient<Database> | null = null;
+let _supabaseAdmin: SupabaseClient<Database> | null = null;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables');
+function getSupabaseClient(): SupabaseClient<Database> {
+  if (_supabase) return _supabase;
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    throw new Error('Missing Supabase environment variables');
+  }
+
+  _supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
+  return _supabase;
 }
 
-// Client for public operations (respects RLS)
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
+// Proxy that lazily initializes the client
+export const supabase = new Proxy({} as SupabaseClient<Database>, {
+  get(_, prop) {
+    const client = getSupabaseClient();
+    const value = (client as unknown as Record<string, unknown>)[prop as string];
+    if (typeof value === 'function') {
+      return value.bind(client);
+    }
+    return value;
+  }
+});
 
-// Admin client for server-side operations requiring elevated privileges
+// Admin client getter for server-side operations requiring elevated privileges
 // IMPORTANT: Only use this server-side, never expose to client
-const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-export const supabaseAdmin = serviceRoleKey
-  ? createClient<Database>(supabaseUrl, serviceRoleKey, {
-      auth: {
-        autoRefreshToken: false,
-        persistSession: false
-      }
-    })
-  : null;
+export function getSupabaseAdmin(): SupabaseClient<Database> | null {
+  if (_supabaseAdmin) return _supabaseAdmin;
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !serviceRoleKey) return null;
+
+  _supabaseAdmin = createClient<Database>(supabaseUrl, serviceRoleKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false
+    }
+  });
+  return _supabaseAdmin;
+}
+
+// Legacy export - use getSupabaseAdmin() instead
+export const supabaseAdmin = null as SupabaseClient<Database> | null;
 
 // Types for filtering
 import type { ToolContent, ToolCategory } from '../types/tool-content';

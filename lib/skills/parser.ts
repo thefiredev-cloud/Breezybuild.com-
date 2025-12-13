@@ -343,6 +343,16 @@ export function validateSkillContent(content: string): ValidationResult {
 }
 
 /**
+ * Generate a slug from a name
+ */
+export function generateSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+/**
  * Validate a skill slug
  */
 export function validateSlug(slug: string): { valid: boolean; error?: string } {

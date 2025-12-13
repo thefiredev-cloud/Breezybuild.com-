@@ -9,6 +9,13 @@ import {
 
 export const dynamic = 'force-dynamic';
 
+interface SkillData {
+  tags: string[] | null;
+  storage_location: string;
+  is_active: boolean;
+  created_at: string;
+}
+
 async function getAnalytics() {
   const supabase = await createClient();
 
@@ -17,7 +24,7 @@ async function getAnalytics() {
     .from('skills')
     .select('tags, storage_location, is_active, created_at');
 
-  const skillsData = skills || [];
+  const skillsData = (skills || []) as SkillData[];
 
   // Calculate tag distribution
   const tagCounts: Record<string, number> = {};

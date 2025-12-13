@@ -29,7 +29,15 @@ async function getActivityLogs(): Promise<ActivityLog[]> {
   return data as ActivityLog[];
 }
 
-async function getRecentSkillChanges() {
+interface SkillChange {
+  id: string;
+  slug: string;
+  name: string;
+  updated_at: string;
+  created_at: string;
+}
+
+async function getRecentSkillChanges(): Promise<SkillChange[]> {
   const supabase = await createClient();
   const { data } = await supabase
     .from('skills')
@@ -37,7 +45,7 @@ async function getRecentSkillChanges() {
     .order('updated_at', { ascending: false })
     .limit(10);
 
-  return data || [];
+  return (data || []) as SkillChange[];
 }
 
 function formatRelativeTime(dateString: string): string {

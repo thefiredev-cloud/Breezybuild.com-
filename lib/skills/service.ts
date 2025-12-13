@@ -83,7 +83,7 @@ export async function createSkill(data: CreateSkillRequest): Promise<Skill> {
       storage_location: data.storage_location,
       file_path: filePath,
       last_synced_at: new Date().toISOString(),
-    })
+    } as never)
     .select()
     .single();
 
@@ -174,6 +174,11 @@ export async function listSkills(filters?: SkillFilters): Promise<Skill[]> {
   return (data as Skill[]) || [];
 }
 
+interface SkillCountData {
+  storage_location: string;
+  is_active: boolean;
+}
+
 /**
  * Get skill count by location
  */
@@ -191,7 +196,7 @@ export async function getSkillCounts(): Promise<{
 
   if (error) throw new Error(`Database error: ${error.message}`);
 
-  const skills = data || [];
+  const skills = (data || []) as SkillCountData[];
   return {
     total: skills.length,
     global: skills.filter((s) => s.storage_location === 'global').length,
@@ -255,7 +260,7 @@ export async function updateSkill(
     .update({
       ...updated,
       last_synced_at: new Date().toISOString(),
-    })
+    } as never)
     .eq('slug', slug)
     .select()
     .single();
@@ -341,7 +346,7 @@ export async function syncSkillsToDatabase(): Promise<SyncSkillsResponse> {
         .select('id')
         .eq('slug', file.slug)
         .eq('storage_location', file.location)
-        .single();
+        .single() as { data: { id: string } | null };
 
       const skillData = {
         slug: file.slug,
@@ -359,7 +364,7 @@ export async function syncSkillsToDatabase(): Promise<SyncSkillsResponse> {
         // Update
         const { error } = await supabaseAdmin
           .from('skills')
-          .update(skillData)
+          .update(skillData as never)
           .eq('id', existing.id);
 
         if (error) {
@@ -369,7 +374,7 @@ export async function syncSkillsToDatabase(): Promise<SyncSkillsResponse> {
         }
       } else {
         // Insert
-        const { error } = await supabaseAdmin.from('skills').insert(skillData);
+        const { error } = await supabaseAdmin.from('skills').insert(skillData as never);
 
         if (error) {
           results.errors.push(`Error creating ${file.slug}: ${error.message}`);
@@ -424,7 +429,7 @@ export async function syncSingleSkill(
   if (existing) {
     const { data, error } = await supabaseAdmin
       .from('skills')
-      .update(skillData)
+      .update(skillData as never)
       .eq('id', existing.id)
       .select()
       .single();
@@ -434,7 +439,7 @@ export async function syncSingleSkill(
   } else {
     const { data, error } = await supabaseAdmin
       .from('skills')
-      .insert(skillData)
+      .insert(skillData as never)
       .select()
       .single();
 
