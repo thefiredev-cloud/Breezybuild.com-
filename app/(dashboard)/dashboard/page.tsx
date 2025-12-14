@@ -9,8 +9,32 @@ export const dynamic = 'force-dynamic';
 
 type ProfileRow = { full_name: string | null };
 type SubscriptionRow = { tier: string; status: string };
-type PostRow = { id: string; title: string; slug: string; excerpt: string | null; category: string; published_at: string | null };
-type ResearchRow = { id: string; title: string; summary: string | null; research_date: string; topic: { name: string } | null };
+type PostRow = {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  category: string;
+  published_at: string | null;
+  content: string;
+  key_takeaways: string[] | null;
+  tagline: string | null;
+};
+type ResearchRow = {
+  id: string;
+  title: string;
+  summary: string | null;
+  research_date: string;
+  topic: { name: string } | null;
+  opportunity_score: number;
+  is_featured: boolean;
+};
+
+function calculateReadTime(content: string): number {
+  const wordsPerMinute = 200;
+  const words = content.trim().split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / wordsPerMinute));
+}
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -31,14 +55,14 @@ export default async function DashboardPage() {
       .single(),
     supabase
       .from('posts')
-      .select('id, title, slug, excerpt, category, published_at')
+      .select('id, title, slug, excerpt, category, published_at, content, key_takeaways, tagline')
       .eq('is_published', true)
       .order('published_at', { ascending: false })
       .limit(1)
       .single(),
     supabase
       .from('daily_research')
-      .select('id, title, summary, research_date, topic:research_topics(name)')
+      .select('id, title, summary, research_date, topic:research_topics(name), opportunity_score, is_featured')
       .eq('is_published', true)
       .order('research_date', { ascending: false })
       .limit(3),
@@ -77,6 +101,9 @@ export default async function DashboardPage() {
               category={post.category}
               href={`/posts/${post.slug}`}
               date={post.published_at}
+              keyTakeaways={post.key_takeaways}
+              tagline={post.tagline}
+              readTime={calculateReadTime(post.content)}
             />
           ) : (
             <div className="bg-white rounded-xl border border-sand-200 p-6 text-center">
@@ -97,6 +124,8 @@ export default async function DashboardPage() {
                 category={item.topic?.name}
                 href={`/daily/${item.research_date}`}
                 date={item.research_date}
+                opportunityScore={item.opportunity_score}
+                isFeatured={item.is_featured}
               />
             ))
           ) : (
