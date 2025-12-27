@@ -43,16 +43,16 @@ export function ContentPreviewCard({
 
   return (
     <Link href={href}>
-      <Card className="transition-all hover:shadow-warm hover:scale-[1.02]">
+      <Card className="transition-all hover:shadow-primary hover:scale-[1.02]">
         <CardHeader className="pb-2">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-breezy-600">
+            <div className="flex items-center gap-2 text-primary-dark">
               {icon}
               <span className="text-sm font-medium">
                 {type === 'post' ? "Today's Post" : 'Daily Research'}
               </span>
               {isFeatured && (
-                <span className="text-xs bg-breezy-100 text-breezy-700 px-2 py-0.5 rounded-full font-medium">
+                <span className="text-xs bg-primary-100 text-primary-700 px-2 py-0.5 rounded-full font-medium">
                   Featured
                 </span>
               )}
@@ -65,28 +65,28 @@ export function ContentPreviewCard({
           </div>
         </CardHeader>
         <CardContent>
-          <h3 className="text-lg font-semibold text-sand-900 mb-2 line-clamp-2">
+          <h3 className="font-display text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-2 line-clamp-2">
             {title}
           </h3>
           {tagline && (
-            <p className="text-breezy-600 text-sm font-medium mb-2">
+            <p className="text-primary-dark text-sm font-medium mb-2">
               {tagline}
             </p>
           )}
           {excerpt && (
-            <p className="text-sand-600 text-sm line-clamp-3">
+            <p className="text-zinc-600 dark:text-zinc-400 text-sm line-clamp-3">
               {excerpt}
             </p>
           )}
 
           {/* Key Takeaways for Posts */}
           {type === 'post' && keyTakeaways && keyTakeaways.length > 0 && (
-            <div className="mt-4 pt-3 border-t border-sand-100">
-              <p className="text-xs font-semibold text-sand-500 uppercase tracking-wide mb-2">Key Takeaways</p>
+            <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800">
+              <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wide mb-2">Key Takeaways</p>
               <ul className="space-y-1">
                 {keyTakeaways.slice(0, 2).map((takeaway, idx) => (
-                  <li key={idx} className="text-sm text-sand-600 flex items-start gap-2">
-                    <span className="text-breezy-500 mt-1 flex-shrink-0">•</span>
+                  <li key={idx} className="text-sm text-zinc-600 dark:text-zinc-400 flex items-start gap-2">
+                    <span className="text-primary mt-1 flex-shrink-0">•</span>
                     <span className="line-clamp-1">{takeaway}</span>
                   </li>
                 ))}
@@ -96,22 +96,22 @@ export function ContentPreviewCard({
 
           {/* Opportunity Score for Research */}
           {type === 'research' && opportunityScore !== undefined && opportunityScore > 0 && (
-            <div className="mt-4 pt-3 border-t border-sand-100">
+            <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-semibold text-sand-500 uppercase tracking-wide">Opportunity</span>
-                <div className="flex-1 h-2 bg-sand-100 rounded-full overflow-hidden">
+                <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wide">Opportunity</span>
+                <div className="flex-1 h-2 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-breezy-400 to-breezy-600 rounded-full"
+                    className="h-full bg-gradient-to-r from-primary to-primary-dark rounded-full"
                     style={{ width: `${opportunityScore}%` }}
                   />
                 </div>
-                <span className="text-sm font-semibold text-breezy-600">{opportunityScore}</span>
+                <span className="text-sm font-semibold text-primary-dark">{opportunityScore}</span>
               </div>
             </div>
           )}
 
           {/* Footer with date and read time */}
-          <div className="flex items-center gap-2 mt-4 text-sand-400 text-xs">
+          <div className="flex items-center gap-2 mt-4 text-zinc-400 dark:text-zinc-500 text-xs">
             {readTime && (
               <>
                 <span>{readTime} min read</span>

@@ -3,11 +3,11 @@ import { TESTIMONIALS } from '@/lib/constants';
 
 export function SocialProofSection() {
   return (
-    <section id="testimonials" className="section-padding bg-sand-50">
+    <section id="testimonials" className="section-padding bg-zinc-50">
       <div className="container-wide">
         {/* Section header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-sand-900">
+          <h2 className="text-3xl md:text-4xl font-bold font-display text-zinc-900">
             {TESTIMONIALS.headline}
           </h2>
         </div>

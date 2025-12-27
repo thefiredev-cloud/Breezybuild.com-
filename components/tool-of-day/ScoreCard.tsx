@@ -6,7 +6,7 @@ interface ScoreCardProps {
 
 const SCORE_COLORS = {
   high: 'bg-emerald-500',
-  medium: 'bg-breezy-500',
+  medium: 'bg-primary',
   low: 'bg-red-400',
 };
 
@@ -36,18 +36,18 @@ export function ScoreCard({ label, score, maxScore = 10 }: ScoreCardProps) {
   const colorClass = getScoreColor(score);
 
   return (
-    <div className="bg-white rounded-xl border border-sand-200 p-4">
+    <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-xs font-medium text-sand-500 uppercase tracking-wide">{label}</span>
-        <span className="text-xs text-sand-400">ⓘ</span>
+        <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wide">{label}</span>
+        <span className="text-xs text-zinc-400 dark:text-zinc-500">ⓘ</span>
       </div>
       <div className="flex items-baseline gap-1 mb-1">
-        <span className="text-2xl font-bold text-sand-900">{score}</span>
+        <span className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">{score}</span>
         {description && (
-          <span className="text-sm text-sand-600">{description}</span>
+          <span className="text-sm text-zinc-600 dark:text-zinc-400">{description}</span>
         )}
       </div>
-      <div className="h-1.5 bg-sand-100 rounded-full overflow-hidden">
+      <div className="h-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
         <div
           className={`h-full ${colorClass} rounded-full transition-all duration-500`}
           style={{ width: `${percentage}%` }}

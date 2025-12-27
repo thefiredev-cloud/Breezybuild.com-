@@ -26,13 +26,13 @@ export function ToolSidebar({ research }: ToolSidebarProps) {
 
       {/* Tool Info Card */}
       {(research.tool_url || research.tool_pricing) && (
-        <div className="bg-white rounded-xl border border-sand-200 p-4">
-          <h3 className="text-sm font-semibold text-sand-900 mb-3">Tool Info</h3>
+        <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4">
+          <h3 className="font-display text-sm font-semibold text-zinc-900 dark:text-zinc-100 mb-3">Tool Info</h3>
           <div className="space-y-3">
             {research.tool_pricing && (
               <div>
-                <p className="text-xs text-sand-500 uppercase tracking-wide mb-1">Pricing</p>
-                <p className="text-sm font-medium text-sand-800">{research.tool_pricing}</p>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 uppercase tracking-wide mb-1">Pricing</p>
+                <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{research.tool_pricing}</p>
               </div>
             )}
             {research.tool_url && (
@@ -40,7 +40,7 @@ export function ToolSidebar({ research }: ToolSidebarProps) {
                 href={research.tool_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block w-full text-center py-2 px-4 bg-breezy-500 text-white text-sm font-semibold rounded-lg hover:bg-breezy-600 transition-colors"
+                className="block w-full text-center py-2 px-4 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary-dark transition-colors"
               >
                 Visit Tool →
               </a>

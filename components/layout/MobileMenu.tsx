@@ -22,6 +22,7 @@ interface MobileMenuProps {
 
 const TIER_CONFIG: Record<SubscriptionTier, { label: string; variant: 'default' | 'highlight' | 'outline' }> = {
   free: { label: 'Free', variant: 'outline' },
+  starter: { label: 'Starter', variant: 'default' },
   pro: { label: 'Pro', variant: 'highlight' },
   enterprise: { label: 'Enterprise', variant: 'highlight' },
 };
@@ -45,7 +46,7 @@ export function MobileMenu({ user, subscription }: MobileMenuProps) {
       {/* Hamburger Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="p-2 text-sand-600 hover:text-sand-900 hover:bg-sand-100 rounded-lg transition-colors"
+        className="p-2 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors"
         aria-label="Open menu"
       >
         <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -57,20 +58,20 @@ export function MobileMenu({ user, subscription }: MobileMenuProps) {
       {isOpen && (
         <div className="fixed inset-0 bg-white z-50 animate-fade-in">
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-sand-200">
+          <div className="flex items-center justify-between p-4 border-b border-zinc-200">
             <Link href="/dashboard" onClick={() => setIsOpen(false)} className="inline-flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-cta flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
                 <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <span className="text-xl font-bold text-sand-900">
-                breezy<span className="text-breezy-500">build</span><span className="text-sand-500">.com</span>
+              <span className="text-xl font-bold font-display text-zinc-900">
+                breezy<span className="text-primary">build</span><span className="text-zinc-500">.com</span>
               </span>
             </Link>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-2 text-sand-600 hover:text-sand-900 hover:bg-sand-100 rounded-lg transition-colors"
+              className="p-2 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors"
               aria-label="Close menu"
             >
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -80,7 +81,7 @@ export function MobileMenu({ user, subscription }: MobileMenuProps) {
           </div>
 
           {/* User Info */}
-          <div className="p-4 border-b border-sand-200">
+          <div className="p-4 border-b border-zinc-200">
             <div className="flex items-center gap-3">
               <Avatar
                 src={user.avatarUrl}
@@ -89,10 +90,10 @@ export function MobileMenu({ user, subscription }: MobileMenuProps) {
                 size="lg"
               />
               <div className="flex-1 min-w-0">
-                <p className="text-base font-semibold text-sand-900 truncate">
+                <p className="text-base font-semibold text-zinc-900 truncate">
                   {user.fullName || 'User'}
                 </p>
-                <p className="text-sm text-sand-500 truncate">
+                <p className="text-sm text-zinc-500 truncate">
                   {user.email}
                 </p>
                 <Badge variant={tierConfig.variant} className="mt-1">
@@ -111,8 +112,8 @@ export function MobileMenu({ user, subscription }: MobileMenuProps) {
                 onClick={() => setIsOpen(false)}
                 className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors ${
                   pathname === link.href
-                    ? 'bg-breezy-100 text-breezy-700'
-                    : 'text-sand-700 hover:bg-sand-100'
+                    ? 'bg-primary-100 text-primary-700'
+                    : 'text-zinc-700 hover:bg-zinc-100'
                 }`}
               >
                 {link.label}
@@ -122,7 +123,7 @@ export function MobileMenu({ user, subscription }: MobileMenuProps) {
 
           {/* Upgrade CTA (for free users) */}
           {!subscription.hasPaidAccess && (
-            <div className="p-4 border-t border-sand-200">
+            <div className="p-4 border-t border-zinc-200">
               <Link href="/#pricing" onClick={() => setIsOpen(false)}>
                 <Button variant="primary" className="w-full">
                   Upgrade to Unlock Archive
@@ -132,11 +133,11 @@ export function MobileMenu({ user, subscription }: MobileMenuProps) {
           )}
 
           {/* Sign Out */}
-          <div className="p-4 border-t border-sand-200">
+          <div className="p-4 border-t border-zinc-200">
             <form action="/auth/signout" method="POST">
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sand-600 hover:text-sand-900 hover:bg-sand-100 rounded-lg transition-colors"
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-lg transition-colors"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />

@@ -31,7 +31,7 @@ export function ProfileSection({ profile, userEmail }: ProfileSectionProps) {
   return (
     <Card hover={false}>
       <CardHeader>
-        <h2 className="text-xl font-semibold text-sand-900">Profile Information</h2>
+        <h2 className="font-display text-xl font-semibold text-zinc-900 dark:text-zinc-100">Profile Information</h2>
       </CardHeader>
       <CardContent>
         <div className="flex flex-col sm:flex-row items-start gap-6">
@@ -50,11 +50,11 @@ export function ProfileSection({ profile, userEmail }: ProfileSectionProps) {
           <div className="flex-1 w-full">
             {/* Email - read only */}
             <div className="mb-4">
-              <label className="block text-sm font-medium text-sand-600 mb-1">
+              <label className="block text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-1">
                 Email
               </label>
               <div className="flex items-center gap-2">
-                <span className="text-sand-900">{userEmail}</span>
+                <span className="text-zinc-900 dark:text-zinc-100">{userEmail}</span>
                 {profile?.email_verified && (
                   <Badge variant="default" className="text-xs">
                     Verified
@@ -67,7 +67,7 @@ export function ProfileSection({ profile, userEmail }: ProfileSectionProps) {
             <form action={handleSubmit}>
               <div className="grid gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-sand-600 mb-1">
+                  <label className="block text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-1">
                     Full Name
                   </label>
                   <Input
@@ -77,7 +77,7 @@ export function ProfileSection({ profile, userEmail }: ProfileSectionProps) {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-sand-600 mb-1">
+                  <label className="block text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-1">
                     Company
                   </label>
                   <Input
@@ -87,7 +87,7 @@ export function ProfileSection({ profile, userEmail }: ProfileSectionProps) {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-sand-600 mb-1">
+                  <label className="block text-sm font-medium text-zinc-600 dark:text-zinc-400 mb-1">
                     Website
                   </label>
                   <Input

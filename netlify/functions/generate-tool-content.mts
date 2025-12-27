@@ -101,6 +101,11 @@ async function callPerplexityAPI(toolName: string, searchQuery: string): Promise
 
   const prompt = `You are a technical content researcher for solo founders building SaaS products and hardware/robotics projects. Research the tool "${toolName}" and provide a comprehensive, factual breakdown in JSON format.
 
+WRITING STYLE RULES:
+- NEVER use em-dashes (—). Use commas, periods, or restructure sentences instead.
+- Write in a natural, human tone. Avoid overly formal or robotic phrasing.
+- Keep sentences punchy and direct.
+
 IMPORTANT: Return ONLY valid JSON. No markdown, no code blocks, no explanations - just the JSON object.
 
 Required JSON structure:

@@ -22,11 +22,11 @@ interface DashboardHeaderProps {
 
 export function DashboardHeader({ user, subscription }: DashboardHeaderProps) {
   return (
-    <header className="border-b border-sand-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+    <header className="border-b border-zinc-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
       <div className="container-wide py-3 flex items-center justify-between">
         {/* Logo */}
         <Link href="/dashboard" className="inline-flex items-center gap-2">
-          <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-lg shadow-orange-500/20">
+          <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-lg shadow-primary/20">
             <Image
               src="/logo.jpg"
               alt="Breezy Build Logo"
@@ -35,8 +35,8 @@ export function DashboardHeader({ user, subscription }: DashboardHeaderProps) {
               sizes="36px"
             />
           </div>
-          <span className="text-xl font-bold text-sand-900">
-            breezy<span className="text-breezy-500">build</span><span className="text-sand-500">.com</span>
+          <span className="text-xl font-bold font-display text-zinc-900">
+            breezy<span className="text-primary">build</span><span className="text-zinc-500">.com</span>
           </span>
         </Link>
 

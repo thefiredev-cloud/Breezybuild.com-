@@ -10,7 +10,7 @@
 // ENUMS
 // =====================================================
 
-export type SubscriptionTier = 'free' | 'pro' | 'enterprise';
+export type SubscriptionTier = 'free' | 'starter' | 'pro' | 'enterprise';
 
 export type SubscriptionStatus =
   | 'active'
@@ -461,6 +461,11 @@ export interface Database {
         Insert: AdminActivityLogInsert;
         Update: never;
       };
+      llm_updates: {
+        Row: LlmUpdate;
+        Insert: LlmUpdateInsert;
+        Update: LlmUpdateUpdate;
+      };
     };
     Functions: {
       has_active_subscription: {
@@ -487,7 +492,7 @@ export interface Database {
 // =====================================================
 
 export function isSubscriptionTier(value: string): value is SubscriptionTier {
-  return ['free', 'pro', 'enterprise'].includes(value);
+  return ['free', 'starter', 'pro', 'enterprise'].includes(value);
 }
 
 export function isNewsletterStatus(value: string): value is NewsletterStatus {
@@ -603,3 +608,37 @@ export type SkillRecordUpdate = Partial<Omit<SkillRecord, 'id' | 'created_at' | 
 export type AdminActivityLogInsert = Omit<AdminActivityLog, 'id' | 'created_at'> & {
   id?: string;
 };
+
+// =====================================================
+// LLM UPDATES TYPES
+// =====================================================
+
+export type LlmUpdateType =
+  | 'new_release'
+  | 'feature'
+  | 'breaking_change'
+  | 'deprecation'
+  | 'pricing'
+  | 'api_change'
+  | 'model_update';
+
+export interface LlmUpdate {
+  id: string;
+  tool_name: string;
+  version: string | null;
+  update_type: LlmUpdateType;
+  summary: string;
+  raw_data: Record<string, unknown> | null;
+  source_url: string | null;
+  detected_at: string;
+  converted_to_tutorial: boolean;
+  tutorial_date: string | null;
+  created_at: string;
+}
+
+export type LlmUpdateInsert = Omit<LlmUpdate, 'id' | 'created_at' | 'detected_at'> & {
+  id?: string;
+  detected_at?: string;
+};
+
+export type LlmUpdateUpdate = Partial<Omit<LlmUpdate, 'id' | 'created_at'>>;

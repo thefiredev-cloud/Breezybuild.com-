@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 export async function POST(req: NextRequest) {
+  // Rate limit: 10 requests per minute for checkout endpoint
+  const rateLimitResult = await checkRateLimit(req, 'checkout');
+  if (rateLimitResult) {
+    return rateLimitResult;
+  }
+
   try {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 

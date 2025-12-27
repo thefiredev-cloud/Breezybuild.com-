@@ -20,7 +20,7 @@ export function TagList({ tags, maxVisible = 3 }: TagListProps) {
       {visibleTags.map((tag, index) => (
         <span
           key={index}
-          className="inline-flex items-center gap-1 px-3 py-1 bg-sand-50 text-sand-700 text-sm font-medium rounded-full border border-sand-200 hover:bg-sand-100 transition-colors cursor-default"
+          className="inline-flex items-center gap-1 px-3 py-1 bg-zinc-50 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 text-sm font-medium rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-default"
         >
           {tag}
         </span>
@@ -29,7 +29,7 @@ export function TagList({ tags, maxVisible = 3 }: TagListProps) {
       {hiddenCount > 0 && !expanded && (
         <button
           onClick={() => setExpanded(true)}
-          className="inline-flex items-center px-3 py-1 bg-breezy-50 text-breezy-700 text-sm font-medium rounded-full border border-breezy-200 hover:bg-breezy-100 transition-colors"
+          className="inline-flex items-center px-3 py-1 bg-primary-50 text-primary-700 text-sm font-medium rounded-full border border-primary-200 hover:bg-primary-100 transition-colors"
         >
           +{hiddenCount} More
         </button>
@@ -38,7 +38,7 @@ export function TagList({ tags, maxVisible = 3 }: TagListProps) {
       {expanded && tags.length > maxVisible && (
         <button
           onClick={() => setExpanded(false)}
-          className="inline-flex items-center px-3 py-1 bg-sand-50 text-sand-500 text-sm font-medium rounded-full border border-sand-200 hover:bg-sand-100 transition-colors"
+          className="inline-flex items-center px-3 py-1 bg-zinc-50 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-400 text-sm font-medium rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
         >
           Show Less
         </button>

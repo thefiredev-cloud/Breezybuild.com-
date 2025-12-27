@@ -12,28 +12,27 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant = 'primary', size = 'md', isLoading, loadingText = 'Loading...', children, className = '', disabled, ...props }, ref) => {
     const baseStyles = `
-      font-semibold rounded-xl transition-all duration-200
+      font-semibold rounded-lg transition-all duration-200
       inline-flex items-center justify-center
       focus:outline-none focus:ring-2 focus:ring-offset-2
     `.trim();
 
     const variants = {
       primary: `
-        bg-gradient-cta text-white shadow-warm
-        hover:shadow-warm-lg hover:scale-[1.02] active:scale-[0.98]
-        focus:ring-breezy-500
+        bg-primary text-white shadow-primary
+        hover:bg-primary-light hover:shadow-primary-lg hover:scale-[1.02] active:scale-[0.98]
+        focus:ring-primary-500
       `.trim(),
       secondary: `
-        bg-white text-breezy-600 border-2 border-breezy-200
-        hover:border-breezy-400
-        focus:ring-breezy-400
-        dark:bg-sand-800 dark:text-breezy-400 dark:border-sand-600
+        bg-zinc-800 text-zinc-100 border border-zinc-700
+        hover:bg-zinc-700
+        focus:ring-zinc-500
       `.trim(),
       ghost: `
-        bg-transparent text-breezy-600
-        hover:bg-breezy-50
-        focus:ring-breezy-400
-        dark:text-breezy-400 dark:hover:bg-sand-800
+        bg-transparent text-zinc-600
+        hover:bg-zinc-100
+        focus:ring-zinc-400
+        dark:text-zinc-400 dark:hover:bg-zinc-800
       `.trim(),
     };
 

@@ -23,10 +23,10 @@ export function PricingSection() {
       <div className="container-wide">
         {/* Section header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-sand-900 mb-3">
+          <h2 className="text-3xl md:text-4xl font-bold font-display text-zinc-900 mb-3">
             {PRICING.headline}
           </h2>
-          <p className="text-lg text-sand-600">
+          <p className="text-lg text-zinc-600">
             {PRICING.subheadline}
           </p>
         </div>

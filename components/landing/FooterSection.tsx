@@ -2,14 +2,14 @@ import { SITE, FOOTER } from '@/lib/constants';
 
 export function FooterSection() {
   return (
-    <footer className="bg-sand-900 text-sand-300">
+    <footer className="bg-zinc-900 text-zinc-300">
       <div className="container-wide section-padding pb-8">
         {/* Top section */}
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           {/* Logo and tagline */}
           <div className="md:col-span-2">
-            <h3 className="text-2xl font-bold text-white mb-2">{SITE.name}</h3>
-            <p className="text-sand-400 mb-4">{SITE.tagline}</p>
+            <h3 className="text-2xl font-bold font-display text-white mb-2">{SITE.name}</h3>
+            <p className="text-zinc-400 mb-4">{SITE.tagline}</p>
 
             {/* Social links */}
             <div className="flex gap-4">
@@ -17,7 +17,7 @@ export function FooterSection() {
                 href={FOOTER.social.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-sand-800 flex items-center justify-center hover:bg-breezy-600 transition-colors"
+                className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-primary-dark transition-colors"
                 aria-label="Twitter"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -28,7 +28,7 @@ export function FooterSection() {
                 href={FOOTER.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-sand-800 flex items-center justify-center hover:bg-breezy-600 transition-colors"
+                className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center hover:bg-primary-dark transition-colors"
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -46,7 +46,7 @@ export function FooterSection() {
                 <li key={index}>
                   <a
                     href={link.href}
-                    className="hover:text-breezy-400 transition-colors"
+                    className="hover:text-primary transition-colors"
                   >
                     {link.label}
                   </a>
@@ -63,7 +63,7 @@ export function FooterSection() {
                 <li key={index}>
                   <a
                     href={link.href}
-                    className="hover:text-breezy-400 transition-colors"
+                    className="hover:text-primary transition-colors"
                   >
                     {link.label}
                   </a>
@@ -74,11 +74,11 @@ export function FooterSection() {
         </div>
 
         {/* Bottom section */}
-        <div className="pt-8 border-t border-sand-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-sand-500">
+        <div className="pt-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-zinc-500">
             &copy; {FOOTER.copyright}
           </p>
-          <p className="text-sm text-sand-500">
+          <p className="text-sm text-zinc-500">
             {FOOTER.madeWith}
           </p>
         </div>

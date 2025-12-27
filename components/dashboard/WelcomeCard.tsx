@@ -16,9 +16,9 @@ export function WelcomeCard({ userName, userEmail }: WelcomeCardProps) {
   const displayName = userName || userEmail.split('@')[0];
 
   return (
-    <Card hover={false} className="bg-gradient-to-br from-breezy-500 to-warm-500 border-0">
+    <Card hover={false} className="bg-gradient-primary border-0">
       <CardContent className="py-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
+        <h1 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
           {getGreeting()}, {displayName}!
         </h1>
         <p className="text-white/80">

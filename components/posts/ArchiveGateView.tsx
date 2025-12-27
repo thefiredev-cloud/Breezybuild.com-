@@ -31,28 +31,28 @@ export function ArchiveGateView({ post }: ArchiveGateViewProps) {
       <div className="mb-8">
         <div className="flex items-center justify-center gap-3 mb-4">
           <Badge variant="outline">{post.category}</Badge>
-          <span className="text-sm text-sand-500">{publishedDate}</span>
+          <span className="text-sm text-zinc-500 dark:text-zinc-400">{publishedDate}</span>
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-sand-900 mb-4">
+        <h1 className="font-display text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-100 mb-4">
           {post.title}
         </h1>
         {post.excerpt && (
-          <p className="text-lg text-sand-600">{post.excerpt}</p>
+          <p className="text-lg text-zinc-600 dark:text-zinc-400">{post.excerpt}</p>
         )}
       </div>
 
       {/* Gate */}
-      <div className="bg-gradient-to-br from-breezy-50 to-warm-50 rounded-2xl p-8 border-2 border-breezy-200">
-        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-breezy-100 flex items-center justify-center">
-          <svg className="w-8 h-8 text-breezy-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div className="bg-gradient-to-br from-primary-50 to-zinc-50 dark:from-zinc-900 dark:to-zinc-800 rounded-2xl p-8 border-2 border-primary-200 dark:border-zinc-700">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary-100 flex items-center justify-center">
+          <svg className="w-8 h-8 text-primary-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
           </svg>
         </div>
 
-        <h2 className="text-2xl font-bold text-sand-900 mb-2">
+        <h2 className="font-display text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">
           Unlock the Full Archive
         </h2>
-        <p className="text-sand-600 mb-6">
+        <p className="text-zinc-600 dark:text-zinc-400 mb-6">
           This post is from our archive. Upgrade to any paid plan to access all past posts and insights.
         </p>
 

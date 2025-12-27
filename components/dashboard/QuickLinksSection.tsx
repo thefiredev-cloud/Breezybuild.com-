@@ -56,15 +56,15 @@ export function QuickLinksSection() {
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
       {quickLinks.map((link) => (
         <Link key={link.href} href={link.href}>
-          <Card className="h-full transition-all hover:shadow-warm hover:scale-[1.02]">
+          <Card className="h-full transition-all hover:shadow-primary hover:scale-[1.02]">
             <CardContent className="py-4 text-center">
-              <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-breezy-100 text-breezy-600 flex items-center justify-center">
+              <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-primary-100 text-primary-dark flex items-center justify-center">
                 {link.icon}
               </div>
-              <h3 className="font-semibold text-sand-900 text-sm">
+              <h3 className="font-display font-semibold text-zinc-900 dark:text-zinc-100 text-sm">
                 {link.title}
               </h3>
-              <p className="text-sand-500 text-xs mt-1">
+              <p className="text-zinc-500 dark:text-zinc-400 text-xs mt-1">
                 {link.description}
               </p>
             </CardContent>

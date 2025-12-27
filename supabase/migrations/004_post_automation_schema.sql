@@ -4,6 +4,70 @@
 -- =====================================================
 
 -- =====================================================
+-- 0. Create posts table (core content table)
+-- =====================================================
+CREATE TABLE IF NOT EXISTS posts (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  author_id UUID REFERENCES profiles(user_id) ON DELETE SET NULL,
+  -- Content
+  title TEXT NOT NULL,
+  slug TEXT UNIQUE NOT NULL,
+  excerpt TEXT,
+  content_html TEXT,
+  content_text TEXT,
+  category TEXT NOT NULL DEFAULT 'General',
+  -- Publishing
+  is_published BOOLEAN DEFAULT false,
+  published_at TIMESTAMPTZ,
+  scheduled_for TIMESTAMPTZ,
+  -- SEO & Metadata
+  meta_description TEXT,
+  featured_image_url TEXT,
+  tags TEXT[],
+  -- Access control
+  is_premium BOOLEAN DEFAULT false,
+  required_tier TEXT,
+  -- Timestamps
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Indexes for posts
+CREATE INDEX IF NOT EXISTS idx_posts_published ON posts(is_published, published_at DESC);
+CREATE INDEX IF NOT EXISTS idx_posts_slug ON posts(slug);
+CREATE INDEX IF NOT EXISTS idx_posts_category ON posts(category);
+
+-- RLS for posts
+ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
+
+-- Public can read published posts
+CREATE POLICY "Anyone can read published posts"
+ON posts FOR SELECT
+USING (is_published = true);
+
+-- Authors can manage their own posts
+CREATE POLICY "Authors can manage their posts"
+ON posts FOR ALL
+USING (auth.uid() = author_id);
+
+-- Admins can manage all posts
+CREATE POLICY "Admins can manage all posts"
+ON posts FOR ALL
+USING (
+  auth.uid() IN (
+    SELECT user_id FROM profiles
+    WHERE email IN ('tanner@thefiredev.com')
+  )
+);
+
+-- Service role bypass
+CREATE POLICY "Service role can manage posts"
+ON posts FOR ALL
+TO service_role
+USING (true)
+WITH CHECK (true);
+
+-- =====================================================
 -- 1. Create post_topics table (topic queue for posts)
 -- =====================================================
 CREATE TABLE IF NOT EXISTS post_topics (
@@ -160,3 +224,18 @@ CREATE TRIGGER update_post_topics_updated_at
   BEFORE UPDATE ON post_topics
   FOR EACH ROW
   EXECUTE FUNCTION update_post_topics_updated_at();
+
+-- Update trigger for posts table
+CREATE OR REPLACE FUNCTION update_posts_updated_at()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS update_posts_updated_at ON posts;
+CREATE TRIGGER update_posts_updated_at
+  BEFORE UPDATE ON posts
+  FOR EACH ROW
+  EXECUTE FUNCTION update_posts_updated_at();

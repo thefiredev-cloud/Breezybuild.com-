@@ -13,6 +13,7 @@ const STRIPE_LINKS = {
 
 const TIER_CONFIG: Record<SubscriptionTier, { label: string; variant: 'default' | 'highlight' | 'outline' }> = {
   free: { label: 'Free', variant: 'outline' },
+  starter: { label: 'Starter', variant: 'default' },
   pro: { label: 'Pro', variant: 'highlight' },
   enterprise: { label: 'Enterprise', variant: 'highlight' },
 };
@@ -43,7 +44,7 @@ export function SubscriptionCard({ subscription }: SubscriptionCardProps) {
     <Card hover={false}>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold text-sand-900">Subscription</h2>
+          <h2 className="font-display text-xl font-semibold text-zinc-900 dark:text-zinc-100">Subscription</h2>
           <Badge variant={tierConfig.variant}>{tierConfig.label}</Badge>
         </div>
       </CardHeader>
@@ -54,21 +55,21 @@ export function SubscriptionCard({ subscription }: SubscriptionCardProps) {
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-green-500 rounded-full" />
-                <span className="text-sand-700">Active subscription</span>
+                <span className="text-zinc-700 dark:text-zinc-300">Active subscription</span>
               </div>
               {subscription.billing_cycle && (
-                <p className="text-sand-600 text-sm">
+                <p className="text-zinc-600 dark:text-zinc-400 text-sm">
                   Billed {subscription.billing_cycle}
                 </p>
               )}
               {periodEnd && (
-                <p className="text-sand-600 text-sm">
+                <p className="text-zinc-600 dark:text-zinc-400 text-sm">
                   Renews: {periodEnd}
                 </p>
               )}
             </div>
           ) : (
-            <p className="text-sand-600">
+            <p className="text-zinc-600 dark:text-zinc-400">
               You are on the free plan. Upgrade to unlock the full archive and premium features.
             </p>
           )}
@@ -80,7 +81,7 @@ export function SubscriptionCard({ subscription }: SubscriptionCardProps) {
             <a href={STRIPE_LINKS.starter} className="block">
               <Button variant="secondary" className="w-full justify-between">
                 <span>Upgrade to Starter</span>
-                <span className="text-breezy-600">$4.99/mo</span>
+                <span className="text-primary-dark">$4.99/mo</span>
               </Button>
             </a>
             <a href={STRIPE_LINKS.pro} className="block">
@@ -92,7 +93,24 @@ export function SubscriptionCard({ subscription }: SubscriptionCardProps) {
             <a href={STRIPE_LINKS.enterprise} className="block">
               <Button variant="secondary" className="w-full justify-between">
                 <span>Upgrade to Enterprise</span>
-                <span className="text-breezy-600">$99/mo</span>
+                <span className="text-primary-dark">$99/mo</span>
+              </Button>
+            </a>
+          </div>
+        )}
+
+        {tier === 'starter' && (
+          <div className="space-y-3">
+            <a href={STRIPE_LINKS.pro} className="block">
+              <Button variant="primary" className="w-full justify-between">
+                <span>Upgrade to Pro</span>
+                <span>$14.99/mo</span>
+              </Button>
+            </a>
+            <a href={STRIPE_LINKS.enterprise} className="block">
+              <Button variant="secondary" className="w-full justify-between">
+                <span>Upgrade to Enterprise</span>
+                <span className="text-primary-dark">$99/mo</span>
               </Button>
             </a>
           </div>

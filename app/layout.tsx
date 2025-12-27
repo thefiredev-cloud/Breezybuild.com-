@@ -1,9 +1,23 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Syne, DM_Sans } from 'next/font/google';
 import './globals.css';
 import { ToastProvider } from '@/components/ui/Toast';
 
-const inter = Inter({ subsets: ['latin'] });
+// Display font for headings
+const syne = Syne({
+  subsets: ['latin'],
+  variable: '--font-display',
+  weight: ['600', '700', '800'],
+  display: 'swap',
+});
+
+// Body font
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  weight: ['400', '500', '700'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Breezy Build | AI-Powered Development Newsletter',
@@ -35,8 +49,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={`${syne.variable} ${dmSans.variable}`}>
+      <body className="font-sans">
         <ToastProvider>{children}</ToastProvider>
       </body>
     </html>

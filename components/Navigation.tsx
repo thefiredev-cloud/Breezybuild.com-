@@ -13,7 +13,7 @@ export default function Navigation() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-lg shadow-orange-500/20 group-hover:shadow-orange-500/30 transition-shadow">
+            <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-lg shadow-primary/20 group-hover:shadow-primary/30 transition-shadow">
               <Image
                 src="/logo.jpg"
                 alt="Breezy Build Logo"
@@ -22,8 +22,8 @@ export default function Navigation() {
                 sizes="36px"
               />
             </div>
-            <span className="font-semibold text-xl text-stone-900 dark:text-white tracking-tight">
-              breezy<span className="text-orange-500">build</span><span className="text-stone-500">.com</span>
+            <span className="font-semibold font-display text-xl text-stone-900 dark:text-white tracking-tight">
+              breezy<span className="text-primary">build</span><span className="text-stone-500">.com</span>
             </span>
           </Link>
 
@@ -31,13 +31,13 @@ export default function Navigation() {
           <div className="hidden md:flex items-center gap-8">
             <Link
               href="/archive"
-              className="text-stone-600 dark:text-stone-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium transition-colors"
+              className="text-stone-600 dark:text-stone-300 hover:text-primary dark:hover:text-primary-400 font-medium transition-colors"
             >
               Archive
             </Link>
             <Link
               href="/pricing"
-              className="text-stone-600 dark:text-stone-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium transition-colors"
+              className="text-stone-600 dark:text-stone-300 hover:text-primary dark:hover:text-primary-400 font-medium transition-colors"
             >
               Pricing
             </Link>
@@ -77,14 +77,14 @@ export default function Navigation() {
             <div className="flex flex-col gap-4">
               <Link
                 href="/archive"
-                className="text-stone-600 dark:text-stone-300 hover:text-orange-500 font-medium py-2"
+                className="text-stone-600 dark:text-stone-300 hover:text-primary font-medium py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Archive
               </Link>
               <Link
                 href="/pricing"
-                className="text-stone-600 dark:text-stone-300 hover:text-orange-500 font-medium py-2"
+                className="text-stone-600 dark:text-stone-300 hover:text-primary font-medium py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Pricing

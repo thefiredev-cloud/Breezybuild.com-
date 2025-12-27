@@ -31,8 +31,8 @@ export function NavigationTabs() {
           href={tab.href}
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
             isActive(tab)
-              ? 'bg-breezy-100 text-breezy-700'
-              : 'text-sand-600 hover:text-sand-900 hover:bg-sand-100'
+              ? 'bg-primary-100 text-primary-700'
+              : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100'
           }`}
         >
           {tab.label}

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -31,6 +32,12 @@ interface SubscribeResponse {
 }
 
 export async function POST(req: NextRequest): Promise<NextResponse<SubscribeResponse>> {
+  // Rate limit: 5 requests per minute for subscribe endpoint
+  const rateLimitResult = await checkRateLimit(req, 'subscribe');
+  if (rateLimitResult) {
+    return rateLimitResult as NextResponse<SubscribeResponse>;
+  }
+
   try {
     const body: SubscribeRequest = await req.json();
     const { email, source = 'landing_page' } = body;

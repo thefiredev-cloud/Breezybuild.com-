@@ -7,7 +7,7 @@ export function TransformationSection() {
       <div className="container-tight">
         {/* Section header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-sand-900">
+          <h2 className="text-3xl md:text-4xl font-bold font-display text-zinc-900">
             {TRANSFORMATION.headline}
           </h2>
         </div>

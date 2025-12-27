@@ -4,10 +4,10 @@ import { SECONDARY_CTA } from '@/lib/constants';
 
 export function SecondaryCTASection() {
   return (
-    <section id="cta" className="section-padding bg-gradient-warm text-white">
+    <section id="cta" className="section-padding bg-gradient-primary text-white">
       <div className="container-tight text-center">
         {/* Headline */}
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">
           {SECONDARY_CTA.headline}
         </h2>
 
@@ -20,7 +20,7 @@ export function SecondaryCTASection() {
         <Link href="/login">
           <Button
             size="lg"
-            className="bg-white text-breezy-600 hover:bg-breezy-50 shadow-lg"
+            className="bg-white text-primary-dark hover:bg-primary-50 shadow-lg"
           >
             {SECONDARY_CTA.cta}
           </Button>

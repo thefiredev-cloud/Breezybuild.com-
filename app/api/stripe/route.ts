@@ -32,15 +32,15 @@ function getSupabaseAdmin() {
 }
 
 // Map Stripe price IDs to tiers
-function getTierFromPriceId(priceId: string): 'free' | 'pro' | 'enterprise' {
+function getTierFromPriceId(priceId: string): 'free' | 'starter' | 'pro' | 'enterprise' {
   const starterPrice = process.env.STRIPE_PRICE_STARTER;
   const proPrice = process.env.STRIPE_PRICE_PRO;
   const enterprisePrice = process.env.STRIPE_PRICE_ENTERPRISE;
 
-  if (priceId === starterPrice) return 'pro'; // Starter maps to pro tier
+  if (priceId === starterPrice) return 'starter';
   if (priceId === proPrice) return 'pro';
   if (priceId === enterprisePrice) return 'enterprise';
-  return 'pro'; // Default to pro
+  return 'free'; // Default to free for unknown price IDs
 }
 
 export async function POST(req: NextRequest) {
@@ -62,7 +62,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid signature' }, { status: 400 });
   }
 
-  logger.info(`Processing Stripe event: ${event.type}`, { eventType: event.type });
+  logger.info(`Processing Stripe event: ${event.type}`, { eventType: event.type, eventId: event.id });
+
+  // Idempotency check - skip if already processed
+  const { data: existingEvent } = await getSupabaseAdmin()
+    .from('webhook_events')
+    .select('id')
+    .eq('event_id', event.id)
+    .single();
+
+  if (existingEvent) {
+    logger.info(`Event already processed, skipping`, { eventId: event.id });
+    return NextResponse.json({ received: true, skipped: true });
+  }
 
   try {
     switch (event.type) {
@@ -99,6 +111,15 @@ export async function POST(req: NextRequest) {
       default:
         logger.info(`Unhandled event type: ${event.type}`, { eventType: event.type });
     }
+
+    // Record the event as processed for idempotency
+    await getSupabaseAdmin()
+      .from('webhook_events')
+      .insert({
+        event_id: event.id,
+        event_type: event.type,
+        processed_at: new Date().toISOString(),
+      } as never);
 
     return NextResponse.json({ received: true });
   } catch (error) {
