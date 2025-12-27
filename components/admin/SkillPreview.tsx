@@ -47,21 +47,21 @@ export function SkillPreview({
   };
 
   return (
-    <div className="bg-white rounded-xl border border-sand-200 overflow-hidden">
+    <div className="bg-white rounded-xl border border-zinc-200 overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 bg-sand-50 border-b border-sand-200">
+      <div className="flex items-center justify-between px-4 py-3 bg-zinc-50 border-b border-zinc-200">
         <div className="flex items-center gap-4">
-          <span className="text-sm font-medium text-sand-700">SKILL.md Preview</span>
+          <span className="text-sm font-medium text-zinc-700">SKILL.md Preview</span>
           <button
             onClick={() => setShowRaw(!showRaw)}
-            className="text-xs text-sand-500 hover:text-sand-700 underline"
+            className="text-xs text-zinc-500 hover:text-zinc-700 underline"
           >
             {showRaw ? 'Show Formatted' : 'Show Raw'}
           </button>
         </div>
         <button
           onClick={copyToClipboard}
-          className="flex items-center gap-1 text-sm text-sand-600 hover:text-sand-900"
+          className="flex items-center gap-1 text-sm text-zinc-600 hover:text-zinc-900"
         >
           {copied ? (
             <>
@@ -80,7 +80,7 @@ export function SkillPreview({
       {/* Content */}
       <div className="p-6">
         {showRaw ? (
-          <pre className="text-sm text-sand-700 font-mono whitespace-pre-wrap bg-sand-50 p-4 rounded-lg overflow-x-auto">
+          <pre className="text-sm text-zinc-700 font-mono whitespace-pre-wrap bg-zinc-50 p-4 rounded-lg overflow-x-auto">
             {fileContent}
           </pre>
         ) : (
@@ -125,31 +125,31 @@ export function SkillPreview({
 
             {/* Markdown Content */}
             <div>
-              <h4 className="text-xs font-semibold text-sand-500 uppercase mb-2">
+              <h4 className="text-xs font-semibold text-zinc-500 uppercase mb-2">
                 Content
               </h4>
               <div className="prose prose-sand max-w-none">
                 {markdown_content ? (
-                  <div className="bg-sand-50 rounded-lg p-4 text-sm">
+                  <div className="bg-zinc-50 rounded-lg p-4 text-sm">
                     {markdown_content.split('\n').map((line, i) => {
                       // Simple markdown rendering
                       if (line.startsWith('## ')) {
                         return (
-                          <h2 key={i} className="text-lg font-bold text-sand-900 mt-4 mb-2">
+                          <h2 key={i} className="text-lg font-bold text-zinc-900 mt-4 mb-2">
                             {line.replace('## ', '')}
                           </h2>
                         );
                       }
                       if (line.startsWith('### ')) {
                         return (
-                          <h3 key={i} className="text-md font-semibold text-sand-800 mt-3 mb-1">
+                          <h3 key={i} className="text-md font-semibold text-zinc-800 mt-3 mb-1">
                             {line.replace('### ', '')}
                           </h3>
                         );
                       }
                       if (line.startsWith('- ')) {
                         return (
-                          <li key={i} className="ml-4 text-sand-700">
+                          <li key={i} className="ml-4 text-zinc-700">
                             {line.replace('- ', '')}
                           </li>
                         );
@@ -158,14 +158,14 @@ export function SkillPreview({
                         return <br key={i} />;
                       }
                       return (
-                        <p key={i} className="text-sand-700">
+                        <p key={i} className="text-zinc-700">
                           {line}
                         </p>
                       );
                     })}
                   </div>
                 ) : (
-                  <p className="text-sand-400 italic">No content yet</p>
+                  <p className="text-zinc-400 italic">No content yet</p>
                 )}
               </div>
             </div>

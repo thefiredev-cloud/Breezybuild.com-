@@ -12,7 +12,7 @@ export function AvatarStack({ avatars, size = 40, maxVisible = 5, className = ''
   // Generate avatar colors based on initials
   const getColor = (initials: string) => {
     const colors = [
-      'bg-breezy-500',
+      'bg-primary-500',
       'bg-warm-500',
       'bg-emerald-500',
       'bg-blue-500',
@@ -41,7 +41,7 @@ export function AvatarStack({ avatars, size = 40, maxVisible = 5, className = ''
         ))}
         {remaining > 0 && (
           <div
-            className="relative inline-flex items-center justify-center rounded-full border-2 border-white bg-sand-200 text-sand-600 font-semibold"
+            className="relative inline-flex items-center justify-center rounded-full border-2 border-white bg-zinc-200 text-zinc-600 font-semibold"
             style={{
               width: size,
               height: size,

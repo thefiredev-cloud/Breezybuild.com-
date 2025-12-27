@@ -7,7 +7,7 @@ interface StatusBadgeProps {
 
 const statusStyles: Record<StatusBadgeProps['status'], { bg: string; text: string; label: string }> = {
   active: { bg: 'bg-green-100', text: 'text-green-700', label: 'Active' },
-  inactive: { bg: 'bg-sand-100', text: 'text-sand-600', label: 'Inactive' },
+  inactive: { bg: 'bg-zinc-100', text: 'text-zinc-600', label: 'Inactive' },
   draft: { bg: 'bg-amber-100', text: 'text-amber-700', label: 'Draft' },
   global: { bg: 'bg-purple-100', text: 'text-purple-700', label: 'Global' },
   local: { bg: 'bg-blue-100', text: 'text-blue-700', label: 'Local' },

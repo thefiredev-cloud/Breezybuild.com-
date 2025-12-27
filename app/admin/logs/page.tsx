@@ -71,20 +71,20 @@ export default async function LogsPage() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-sand-900">Activity Logs</h1>
-        <p className="text-sand-600 mt-1">
+        <h1 className="text-2xl font-bold text-zinc-900">Activity Logs</h1>
+        <p className="text-zinc-600 mt-1">
           Track admin actions and changes
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Skill Changes */}
-        <div className="bg-white rounded-xl border border-sand-200 overflow-hidden">
-          <div className="px-6 py-4 border-b border-sand-200">
-            <h2 className="font-semibold text-sand-900">Recent Skill Changes</h2>
+        <div className="bg-white rounded-xl border border-zinc-200 overflow-hidden">
+          <div className="px-6 py-4 border-b border-zinc-200">
+            <h2 className="font-semibold text-zinc-900">Recent Skill Changes</h2>
           </div>
           {recentSkillChanges.length > 0 ? (
-            <ul className="divide-y divide-sand-100">
+            <ul className="divide-y divide-zinc-100">
               {recentSkillChanges.map((skill) => {
                 const isNew =
                   new Date(skill.created_at).getTime() ===
@@ -98,11 +98,11 @@ export default async function LogsPage() {
                         }`}
                       />
                       <div className="flex-1">
-                        <p className="text-sand-900">
+                        <p className="text-zinc-900">
                           <span className="font-medium">{skill.name}</span>
                           {isNew ? ' was created' : ' was updated'}
                         </p>
-                        <p className="text-sm text-sand-500">
+                        <p className="text-sm text-zinc-500">
                           {formatRelativeTime(skill.updated_at)}
                         </p>
                       </div>
@@ -112,32 +112,32 @@ export default async function LogsPage() {
               })}
             </ul>
           ) : (
-            <div className="px-6 py-8 text-center text-sand-500">
+            <div className="px-6 py-8 text-center text-zinc-500">
               No recent changes
             </div>
           )}
         </div>
 
         {/* Activity Logs */}
-        <div className="bg-white rounded-xl border border-sand-200 overflow-hidden">
-          <div className="px-6 py-4 border-b border-sand-200">
-            <h2 className="font-semibold text-sand-900">Activity Log</h2>
+        <div className="bg-white rounded-xl border border-zinc-200 overflow-hidden">
+          <div className="px-6 py-4 border-b border-zinc-200">
+            <h2 className="font-semibold text-zinc-900">Activity Log</h2>
           </div>
           {activityLogs.length > 0 ? (
-            <ul className="divide-y divide-sand-100 max-h-[600px] overflow-y-auto">
+            <ul className="divide-y divide-zinc-100 max-h-[600px] overflow-y-auto">
               {activityLogs.map((log) => (
                 <li key={log.id} className="px-6 py-4">
                   <div className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full mt-2 bg-breezy-500" />
+                    <div className="w-2 h-2 rounded-full mt-2 bg-primary-500" />
                     <div className="flex-1">
-                      <p className="text-sand-900">
+                      <p className="text-zinc-900">
                         <span className="font-medium">{log.entity_type}</span>
                         {' '}{log.action}
                         {log.entity_name && (
                           <>: <span className="font-medium">{log.entity_name}</span></>
                         )}
                       </p>
-                      <p className="text-sm text-sand-500">
+                      <p className="text-sm text-zinc-500">
                         {log.user_email} &bull; {formatRelativeTime(log.created_at)}
                       </p>
                     </div>
@@ -146,7 +146,7 @@ export default async function LogsPage() {
               ))}
             </ul>
           ) : (
-            <div className="px-6 py-8 text-center text-sand-500">
+            <div className="px-6 py-8 text-center text-zinc-500">
               <p>No activity logs yet</p>
               <p className="text-sm mt-2">
                 Activity will be logged when you create, update, or delete skills.

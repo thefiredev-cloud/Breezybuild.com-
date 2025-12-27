@@ -69,14 +69,14 @@ export function Modal({
       >
         {/* Header */}
         {(title || showCloseButton) && (
-          <div className="flex items-center justify-between px-6 py-4 border-b border-sand-200">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-200">
             {title && (
-              <h2 className="text-lg font-semibold text-sand-900">{title}</h2>
+              <h2 className="text-lg font-semibold text-zinc-900">{title}</h2>
             )}
             {showCloseButton && (
               <button
                 onClick={onClose}
-                className="p-1 text-sand-400 hover:text-sand-600 hover:bg-sand-100 rounded-lg transition-colors"
+                className="p-1 text-zinc-400 hover:text-zinc-600 hover:bg-zinc-100 rounded-lg transition-colors"
               >
                 <XMarkIcon className="w-5 h-5" />
               </button>
@@ -101,7 +101,7 @@ interface ModalFooterProps {
 
 export function ModalFooter({ children, className = '' }: ModalFooterProps) {
   return (
-    <div className={`flex items-center justify-end gap-3 mt-6 pt-4 border-t border-sand-200 ${className}`}>
+    <div className={`flex items-center justify-end gap-3 mt-6 pt-4 border-t border-zinc-200 ${className}`}>
       {children}
     </div>
   );

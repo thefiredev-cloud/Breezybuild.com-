@@ -106,8 +106,8 @@ export default async function DashboardPage() {
               readTime={calculateReadTime(post.content)}
             />
           ) : (
-            <div className="bg-white rounded-xl border border-sand-200 p-6 text-center">
-              <p className="text-sand-500">No posts yet. Check back soon!</p>
+            <div className="bg-white rounded-xl border border-zinc-200 p-6 text-center">
+              <p className="text-zinc-500">No posts yet. Check back soon!</p>
             </div>
           )}
         </div>
@@ -129,8 +129,8 @@ export default async function DashboardPage() {
               />
             ))
           ) : (
-            <div className="bg-white rounded-xl border border-sand-200 p-6 text-center">
-              <p className="text-sand-500">No research yet. Check back soon!</p>
+            <div className="bg-white rounded-xl border border-zinc-200 p-6 text-center">
+              <p className="text-zinc-500">No research yet. Check back soon!</p>
             </div>
           )}
         </div>

@@ -132,7 +132,7 @@ export function PostForm({ post, mode }: PostFormProps) {
       )}
 
       <div>
-        <label className="block text-sm font-medium text-sand-700 mb-2">
+        <label className="block text-sm font-medium text-zinc-700 mb-2">
           Title
         </label>
         <Input
@@ -145,7 +145,7 @@ export function PostForm({ post, mode }: PostFormProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-sand-700 mb-2">
+        <label className="block text-sm font-medium text-zinc-700 mb-2">
           Slug
         </label>
         <Input
@@ -158,7 +158,7 @@ export function PostForm({ post, mode }: PostFormProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-sand-700 mb-2">
+        <label className="block text-sm font-medium text-zinc-700 mb-2">
           Excerpt
         </label>
         <Input
@@ -170,13 +170,13 @@ export function PostForm({ post, mode }: PostFormProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-sand-700 mb-2">
+        <label className="block text-sm font-medium text-zinc-700 mb-2">
           Category
         </label>
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="w-full px-4 py-3 rounded-xl border-2 border-sand-200 bg-white focus:border-breezy-400 focus:outline-none transition-colors"
+          className="w-full px-4 py-3 rounded-xl border-2 border-zinc-200 bg-white focus:border-primary-400 focus:outline-none transition-colors"
         >
           <option value="general">General</option>
           <option value="tutorial">Tutorial</option>
@@ -187,7 +187,7 @@ export function PostForm({ post, mode }: PostFormProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-sand-700 mb-2">
+        <label className="block text-sm font-medium text-zinc-700 mb-2">
           Content
         </label>
         <textarea
@@ -196,7 +196,7 @@ export function PostForm({ post, mode }: PostFormProps) {
           placeholder="Write your post content here..."
           rows={15}
           required
-          className="w-full px-4 py-3 rounded-xl border-2 border-sand-200 bg-white focus:border-breezy-400 focus:outline-none transition-colors resize-y"
+          className="w-full px-4 py-3 rounded-xl border-2 border-zinc-200 bg-white focus:border-primary-400 focus:outline-none transition-colors resize-y"
         />
       </div>
 
@@ -206,9 +206,9 @@ export function PostForm({ post, mode }: PostFormProps) {
           id="published"
           checked={isPublished}
           onChange={(e) => setIsPublished(e.target.checked)}
-          className="w-5 h-5 rounded border-sand-300 text-breezy-500 focus:ring-breezy-500"
+          className="w-5 h-5 rounded border-zinc-300 text-primary-500 focus:ring-primary-500"
         />
-        <label htmlFor="published" className="text-sm font-medium text-sand-700">
+        <label htmlFor="published" className="text-sm font-medium text-zinc-700">
           Publish immediately
         </label>
       </div>

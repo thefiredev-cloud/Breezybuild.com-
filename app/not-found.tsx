@@ -15,18 +15,18 @@ export default function NotFound() {
             sizes="40px"
           />
         </div>
-        <span className="text-2xl font-bold text-sand-900">
-          Breezy<span className="text-breezy-500">Build</span>
+        <span className="text-2xl font-bold text-zinc-900">
+          Breezy<span className="text-primary-500">Build</span>
         </span>
       </div>
 
       {/* 404 Content */}
       <div className="text-center max-w-md">
-        <h1 className="text-8xl font-bold text-breezy-500 mb-4">404</h1>
-        <h2 className="text-2xl font-semibold text-sand-900 mb-4">
+        <h1 className="text-8xl font-bold text-primary-500 mb-4">404</h1>
+        <h2 className="text-2xl font-semibold text-zinc-900 mb-4">
           Page not found
         </h2>
-        <p className="text-sand-600 mb-8">
+        <p className="text-zinc-600 mb-8">
           Looks like this page took a detour. It happens to the best of us.
           Let&apos;s get you back on track.
         </p>
@@ -41,7 +41,7 @@ export default function NotFound() {
           </Link>
           <Link
             href="/browse"
-            className="px-6 py-3 bg-white text-breezy-600 font-semibold rounded-xl border-2 border-breezy-200 hover:border-breezy-400 transition-all duration-200"
+            className="px-6 py-3 bg-white text-primary-600 font-semibold rounded-xl border-2 border-primary-200 hover:border-primary-400 transition-all duration-200"
           >
             Browse Tools
           </Link>
@@ -50,17 +50,17 @@ export default function NotFound() {
 
       {/* Helpful Links */}
       <div className="mt-12 text-center">
-        <p className="text-sm text-sand-500 mb-3">Or try one of these:</p>
+        <p className="text-sm text-zinc-500 mb-3">Or try one of these:</p>
         <div className="flex flex-wrap gap-4 justify-center text-sm">
-          <Link href="/pricing" className="text-breezy-600 hover:text-breezy-700 hover:underline">
+          <Link href="/pricing" className="text-primary-600 hover:text-primary-700 hover:underline">
             Pricing
           </Link>
-          <span className="text-sand-300">|</span>
-          <Link href="/posts" className="text-breezy-600 hover:text-breezy-700 hover:underline">
+          <span className="text-zinc-300">|</span>
+          <Link href="/posts" className="text-primary-600 hover:text-primary-700 hover:underline">
             Blog
           </Link>
-          <span className="text-sand-300">|</span>
-          <Link href="/login" className="text-breezy-600 hover:text-breezy-700 hover:underline">
+          <span className="text-zinc-300">|</span>
+          <Link href="/login" className="text-primary-600 hover:text-primary-700 hover:underline">
             Login
           </Link>
         </div>

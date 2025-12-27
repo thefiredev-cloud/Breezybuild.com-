@@ -18,7 +18,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {label && (
           <label
             htmlFor={textareaId}
-            className="block text-sm font-medium text-sand-700 dark:text-sand-300 mb-1.5"
+            className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1.5"
           >
             {label}
           </label>
@@ -31,11 +31,11 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             resize-y min-h-[100px]
             ${error
               ? 'border-red-300 focus:border-red-500 focus:ring-red-200'
-              : 'border-sand-200 focus:border-breezy-400 focus:ring-breezy-200 dark:border-sand-600 dark:focus:border-breezy-500'
+              : 'border-zinc-200 focus:border-primary-400 focus:ring-primary-200 dark:border-zinc-600 dark:focus:border-primary-500'
             }
             focus:outline-none focus:ring-2 focus:ring-offset-0
-            placeholder:text-sand-400
-            bg-white dark:bg-sand-800 dark:text-white
+            placeholder:text-zinc-400
+            bg-white dark:bg-zinc-800 dark:text-white
             ${className}
           `.trim()}
           aria-invalid={error ? 'true' : 'false'}

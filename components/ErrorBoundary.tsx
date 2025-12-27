@@ -49,15 +49,15 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             <div className="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
               <ExclamationTriangleIcon className="w-8 h-8 text-red-600" />
             </div>
-            <h2 className="text-xl font-semibold text-sand-900 mb-2">
+            <h2 className="text-xl font-semibold text-zinc-900 mb-2">
               Something went wrong
             </h2>
-            <p className="text-sand-600 mb-6">
+            <p className="text-zinc-600 mb-6">
               We encountered an unexpected error. Please try refreshing the page.
             </p>
             {process.env.NODE_ENV === 'development' && this.state.error && (
-              <details className="mb-6 text-left bg-sand-50 rounded-lg p-4">
-                <summary className="cursor-pointer text-sm font-medium text-sand-700">
+              <details className="mb-6 text-left bg-zinc-50 rounded-lg p-4">
+                <summary className="cursor-pointer text-sm font-medium text-zinc-700">
                   Error details
                 </summary>
                 <pre className="mt-2 text-xs text-red-600 overflow-auto">
@@ -70,14 +70,14 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             <div className="flex gap-3 justify-center">
               <button
                 onClick={this.handleReset}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-breezy-500 text-white rounded-lg hover:bg-breezy-600 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
               >
                 <ArrowPathIcon className="w-4 h-4" />
                 Try again
               </button>
               <button
                 onClick={() => window.location.reload()}
-                className="px-4 py-2 border border-sand-300 text-sand-700 rounded-lg hover:bg-sand-50 transition-colors"
+                className="px-4 py-2 border border-zinc-300 text-zinc-700 rounded-lg hover:bg-zinc-50 transition-colors"
               >
                 Refresh page
               </button>

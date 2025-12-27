@@ -16,17 +16,17 @@ export function TimelineStep({ stage, isLast = false }: TimelineStepProps) {
           {time.split(' ')[0]}
         </div>
         {!isLast && (
-          <div className="w-0.5 h-full bg-gradient-to-b from-breezy-400 to-breezy-100 mt-2" />
+          <div className="w-0.5 h-full bg-gradient-to-b from-primary-400 to-primary-100 mt-2" />
         )}
       </div>
 
       {/* Content */}
       <div className={`pb-8 ${isLast ? 'pb-0' : ''}`}>
-        <span className="text-sm font-medium text-breezy-600 uppercase tracking-wide">
+        <span className="text-sm font-medium text-primary-600 uppercase tracking-wide">
           {time}
         </span>
-        <h3 className="text-xl font-semibold text-sand-900 mt-1">{title}</h3>
-        <p className="text-sand-600 mt-2 leading-relaxed">{description}</p>
+        <h3 className="text-xl font-semibold text-zinc-900 mt-1">{title}</h3>
+        <p className="text-zinc-600 mt-2 leading-relaxed">{description}</p>
       </div>
     </div>
   );

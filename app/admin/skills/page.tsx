@@ -48,8 +48,8 @@ export default async function SkillsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-sand-900">Skills</h1>
-          <p className="text-sand-600 mt-1">
+          <h1 className="text-2xl font-bold text-zinc-900">Skills</h1>
+          <p className="text-zinc-600 mt-1">
             Manage Claude skill MD files ({skills.length} total)
           </p>
         </div>
@@ -71,30 +71,30 @@ export default async function SkillsPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-white rounded-xl border border-sand-200 p-4">
-          <p className="text-sm text-sand-500">Total Skills</p>
-          <p className="text-2xl font-bold text-sand-900">{skills.length}</p>
+        <div className="bg-white rounded-xl border border-zinc-200 p-4">
+          <p className="text-sm text-zinc-500">Total Skills</p>
+          <p className="text-2xl font-bold text-zinc-900">{skills.length}</p>
         </div>
-        <div className="bg-white rounded-xl border border-sand-200 p-4">
-          <p className="text-sm text-sand-500">Global</p>
+        <div className="bg-white rounded-xl border border-zinc-200 p-4">
+          <p className="text-sm text-zinc-500">Global</p>
           <p className="text-2xl font-bold text-purple-600">{globalCount}</p>
         </div>
-        <div className="bg-white rounded-xl border border-sand-200 p-4">
-          <p className="text-sm text-sand-500">Local</p>
+        <div className="bg-white rounded-xl border border-zinc-200 p-4">
+          <p className="text-sm text-zinc-500">Local</p>
           <p className="text-2xl font-bold text-blue-600">{localCount}</p>
         </div>
-        <div className="bg-white rounded-xl border border-sand-200 p-4">
-          <p className="text-sm text-sand-500">Active</p>
+        <div className="bg-white rounded-xl border border-zinc-200 p-4">
+          <p className="text-sm text-zinc-500">Active</p>
           <p className="text-2xl font-bold text-green-600">{activeCount}</p>
         </div>
       </div>
 
       {/* Skills Table */}
-      <div className="bg-white rounded-xl border border-sand-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-zinc-200 overflow-hidden">
         {skills.length === 0 ? (
           <div className="p-12 text-center">
-            <p className="text-sand-500 mb-4">No skills found</p>
-            <p className="text-sm text-sand-400 mb-6">
+            <p className="text-zinc-500 mb-4">No skills found</p>
+            <p className="text-sm text-zinc-400 mb-6">
               Create a new skill or sync existing skills from the file system.
             </p>
             <div className="flex items-center justify-center gap-3">
@@ -105,32 +105,32 @@ export default async function SkillsPage() {
           </div>
         ) : (
           <table className="w-full">
-            <thead className="bg-sand-50 border-b border-sand-200">
+            <thead className="bg-zinc-50 border-b border-zinc-200">
               <tr>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-sand-500 uppercase">
+                <th className="text-left px-6 py-3 text-xs font-semibold text-zinc-500 uppercase">
                   Name
                 </th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-sand-500 uppercase">
+                <th className="text-left px-6 py-3 text-xs font-semibold text-zinc-500 uppercase">
                   Location
                 </th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-sand-500 uppercase">
+                <th className="text-left px-6 py-3 text-xs font-semibold text-zinc-500 uppercase">
                   Status
                 </th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-sand-500 uppercase">
+                <th className="text-left px-6 py-3 text-xs font-semibold text-zinc-500 uppercase">
                   Tags
                 </th>
-                <th className="text-right px-6 py-3 text-xs font-semibold text-sand-500 uppercase">
+                <th className="text-right px-6 py-3 text-xs font-semibold text-zinc-500 uppercase">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-sand-100">
+            <tbody className="divide-y divide-zinc-100">
               {skills.map((skill) => (
-                <tr key={skill.id} className="hover:bg-sand-50">
+                <tr key={skill.id} className="hover:bg-zinc-50">
                   <td className="px-6 py-4">
                     <div>
-                      <p className="font-medium text-sand-900">{skill.name}</p>
-                      <p className="text-sm text-sand-500 truncate max-w-md">
+                      <p className="font-medium text-zinc-900">{skill.name}</p>
+                      <p className="text-sm text-zinc-500 truncate max-w-md">
                         {skill.description}
                       </p>
                     </div>
@@ -146,13 +146,13 @@ export default async function SkillsPage() {
                       {skill.tags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-0.5 bg-sand-100 text-sand-600 rounded text-xs"
+                          className="px-2 py-0.5 bg-zinc-100 text-zinc-600 rounded text-xs"
                         >
                           {tag}
                         </span>
                       ))}
                       {skill.tags.length > 3 && (
-                        <span className="text-xs text-sand-400">
+                        <span className="text-xs text-zinc-400">
                           +{skill.tags.length - 3}
                         </span>
                       )}
@@ -161,7 +161,7 @@ export default async function SkillsPage() {
                   <td className="px-6 py-4 text-right">
                     <Link
                       href={`/admin/skills/${skill.slug}/edit`}
-                      className="text-sm text-breezy-600 hover:text-breezy-700 font-medium"
+                      className="text-sm text-primary-600 hover:text-primary-700 font-medium"
                     >
                       Edit
                     </Link>

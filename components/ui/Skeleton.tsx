@@ -8,7 +8,7 @@ export function Skeleton({ className }: SkeletonProps) {
   return (
     <div
       className={cn(
-        'animate-skeleton rounded-md bg-sand-200',
+        'animate-skeleton rounded-md bg-zinc-200',
         className
       )}
       aria-hidden="true"
@@ -31,7 +31,7 @@ export function SkeletonCircle({ className }: SkeletonProps) {
 
 export function SkeletonCard({ className }: SkeletonProps) {
   return (
-    <div className={cn('space-y-3 p-4 border border-sand-200 rounded-xl', className)}>
+    <div className={cn('space-y-3 p-4 border border-zinc-200 rounded-xl', className)}>
       <Skeleton className="h-4 w-1/4" />
       <Skeleton className="h-8 w-full" />
       <Skeleton className="h-4 w-3/4" />
@@ -42,7 +42,7 @@ export function SkeletonCard({ className }: SkeletonProps) {
 // Stats card skeleton for dashboard
 export function SkeletonStatsCard({ className }: SkeletonProps) {
   return (
-    <div className={cn('bg-white rounded-xl border border-sand-200 p-6', className)}>
+    <div className={cn('bg-white rounded-xl border border-zinc-200 p-6', className)}>
       <div className="flex items-center gap-4">
         <Skeleton className="h-12 w-12 rounded-lg" />
         <div className="flex-1 space-y-2">
@@ -70,7 +70,7 @@ export function SkeletonTableRow({ columns = 4, className }: SkeletonProps & { c
 // Tool card skeleton for browse page
 export function SkeletonToolCard({ className }: SkeletonProps) {
   return (
-    <div className={cn('bg-white rounded-xl border border-sand-200 p-6', className)}>
+    <div className={cn('bg-white rounded-xl border border-zinc-200 p-6', className)}>
       <div className="flex items-start gap-3 mb-4">
         <Skeleton className="h-6 w-20 rounded-full" />
         <Skeleton className="h-4 w-24" />

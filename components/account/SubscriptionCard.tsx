@@ -127,8 +127,8 @@ export function SubscriptionCard({ subscription }: SubscriptionCardProps) {
 
         {/* Manage Subscription (for Stripe customers) */}
         {subscription?.stripe_customer_id && (
-          <div className="mt-4 pt-4 border-t border-sand-200">
-            <p className="text-sm text-sand-500">
+          <div className="mt-4 pt-4 border-t border-zinc-200">
+            <p className="text-sm text-zinc-500">
               To manage your subscription, cancel, or update payment method, please contact support.
             </p>
           </div>

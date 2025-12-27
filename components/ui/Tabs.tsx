@@ -17,15 +17,15 @@ interface TabsProps {
 
 export function Tabs({ tabs, activeTab, onChange, className = '' }: TabsProps) {
   return (
-    <div className={`flex border-b border-sand-200 ${className}`}>
+    <div className={`flex border-b border-zinc-200 ${className}`}>
       {tabs.map((tab) => (
         <button
           key={tab.id}
           onClick={() => onChange(tab.id)}
           className={`px-4 py-2 font-medium text-sm transition-all duration-200 border-b-2 -mb-px
             ${activeTab === tab.id
-              ? 'text-breezy-600 border-breezy-500'
-              : 'text-sand-500 border-transparent hover:text-sand-700 hover:border-sand-300'
+              ? 'text-primary-600 border-primary-500'
+              : 'text-zinc-500 border-transparent hover:text-zinc-700 hover:border-zinc-300'
             }
           `}
         >

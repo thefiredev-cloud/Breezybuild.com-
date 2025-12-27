@@ -58,7 +58,7 @@ export function Sidebar() {
   const NavContent = () => (
     <>
       {/* Logo */}
-      <div className="px-4 py-6 border-b border-sand-800">
+      <div className="px-4 py-6 border-b border-zinc-800">
         <Link href="/admin" className="flex items-center gap-2">
           <div className="w-8 h-8 bg-gradient-cta rounded-lg flex items-center justify-center">
             <SparklesIcon className="w-5 h-5 text-white" />
@@ -71,7 +71,7 @@ export function Sidebar() {
       <nav className="flex-1 px-2 py-4 space-y-6 overflow-y-auto">
         {navigation.map((section) => (
           <div key={section.title}>
-            <h3 className="px-3 text-xs font-semibold text-sand-500 uppercase tracking-wider">
+            <h3 className="px-3 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
               {section.title}
             </h3>
             <div className="mt-2 space-y-1">
@@ -84,8 +84,8 @@ export function Sidebar() {
                     onClick={() => setIsMobileOpen(false)}
                     className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors
                       ${active
-                        ? 'bg-breezy-500/20 text-breezy-400'
-                        : 'text-sand-400 hover:text-white hover:bg-sand-800'
+                        ? 'bg-primary-500/20 text-primary-400'
+                        : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
                       }
                     `}
                   >
@@ -100,10 +100,10 @@ export function Sidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="px-4 py-4 border-t border-sand-800">
+      <div className="px-4 py-4 border-t border-zinc-800">
         <Link
           href="/"
-          className="text-sm text-sand-500 hover:text-white transition-colors"
+          className="text-sm text-zinc-500 hover:text-white transition-colors"
         >
           &larr; Back to Site
         </Link>
@@ -116,7 +116,7 @@ export function Sidebar() {
       {/* Mobile menu button */}
       <button
         onClick={() => setIsMobileOpen(true)}
-        className="lg:hidden fixed top-4 left-4 z-40 p-2 bg-sand-900 rounded-lg text-white min-h-[44px] min-w-[44px] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-breezy-500 focus:ring-offset-2"
+        className="lg:hidden fixed top-4 left-4 z-40 p-2 bg-zinc-900 rounded-lg text-white min-h-[44px] min-w-[44px] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
         aria-label="Open navigation menu"
         aria-expanded={isMobileOpen}
         aria-controls="mobile-sidebar"
@@ -139,14 +139,14 @@ export function Sidebar() {
           />
           <div
             id="mobile-sidebar"
-            className="absolute left-0 top-0 bottom-0 w-64 bg-sand-900 flex flex-col animate-slide-in-left"
+            className="absolute left-0 top-0 bottom-0 w-64 bg-zinc-900 flex flex-col animate-slide-in-left"
           >
             <span id="mobile-sidebar-title" className="sr-only">
               Admin Navigation
             </span>
             <button
               onClick={() => setIsMobileOpen(false)}
-              className="absolute top-4 right-4 p-2 text-sand-400 hover:text-white min-h-[44px] min-w-[44px] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-breezy-500 rounded-lg"
+              className="absolute top-4 right-4 p-2 text-zinc-400 hover:text-white min-h-[44px] min-w-[44px] flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg"
               aria-label="Close navigation menu"
             >
               <XMarkIcon className="w-6 h-6" aria-hidden="true" />
@@ -158,7 +158,7 @@ export function Sidebar() {
 
       {/* Desktop sidebar */}
       <aside
-        className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 bg-sand-900"
+        className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 bg-zinc-900"
         aria-label="Admin navigation"
       >
         <NavContent />

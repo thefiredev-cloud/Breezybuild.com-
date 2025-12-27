@@ -74,14 +74,14 @@ function ToastItem({ toast, onRemove }: { toast: Toast; onRemove: () => void }) 
       <div className="flex items-start gap-3">
         <Icon className={`w-5 h-5 ${styles.icon} flex-shrink-0 mt-0.5`} />
         <div className="flex-1 min-w-0">
-          <p className="font-medium text-sand-900">{toast.title}</p>
+          <p className="font-medium text-zinc-900">{toast.title}</p>
           {toast.message && (
-            <p className="text-sm text-sand-600 mt-1">{toast.message}</p>
+            <p className="text-sm text-zinc-600 mt-1">{toast.message}</p>
           )}
         </div>
         <button
           onClick={onRemove}
-          className="flex-shrink-0 text-sand-400 hover:text-sand-600 transition-colors"
+          className="flex-shrink-0 text-zinc-400 hover:text-zinc-600 transition-colors"
           aria-label="Dismiss notification"
         >
           <XMarkIcon className="w-5 h-5" />

@@ -46,10 +46,10 @@ export default async function ArchivePage() {
     <main className="container-wide py-12">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-sand-900 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-4">
             Research Archive
           </h1>
-          <p className="text-lg text-sand-600">
+          <p className="text-lg text-zinc-600">
             {hasPaidAccess
               ? 'Browse all past AI dev tool research'
               : 'Upgrade to unlock the full archive'}
@@ -68,7 +68,7 @@ export default async function ArchivePage() {
           </div>
         ) : (
           <div className="text-center py-16">
-            <p className="text-sand-600">No research yet. Check back soon!</p>
+            <p className="text-zinc-600">No research yet. Check back soon!</p>
           </div>
         )}
       </div>

@@ -16,7 +16,7 @@ export function LoadingSpinner({ size = 'md', className, label }: LoadingSpinner
   return (
     <div className={cn('flex items-center justify-center', className)} role="status">
       <svg
-        className={cn('animate-spin text-breezy-500', sizeClasses[size])}
+        className={cn('animate-spin text-primary-500', sizeClasses[size])}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
@@ -46,7 +46,7 @@ export function PageLoader({ message }: { message?: string }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
       <LoadingSpinner size="lg" />
-      {message && <p className="text-sand-600">{message}</p>}
+      {message && <p className="text-zinc-600">{message}</p>}
     </div>
   );
 }
@@ -56,7 +56,7 @@ export function InlineLoader({ className }: { className?: string }) {
   return (
     <span className={cn('inline-flex items-center gap-2', className)}>
       <LoadingSpinner size="sm" />
-      <span className="text-sm text-sand-600">Loading...</span>
+      <span className="text-sm text-zinc-600">Loading...</span>
     </span>
   );
 }

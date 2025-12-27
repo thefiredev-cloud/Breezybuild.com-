@@ -119,8 +119,8 @@ export default function AdminPostsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-sand-900">Posts</h1>
-          <p className="text-sand-600 mt-1">
+          <h1 className="text-2xl font-bold text-zinc-900">Posts</h1>
+          <p className="text-zinc-600 mt-1">
             {stats.total} total &middot; {stats.published} published &middot; {stats.ai} AI-generated
           </p>
         </div>
@@ -169,7 +169,7 @@ export default function AdminPostsPage() {
       )}
 
       {/* Filter Tabs */}
-      <div className="flex gap-2 border-b border-sand-200 pb-2">
+      <div className="flex gap-2 border-b border-zinc-200 pb-2">
         {[
           { key: 'all', label: 'All', count: stats.total },
           { key: 'ai', label: 'AI Generated', count: stats.ai },
@@ -181,8 +181,8 @@ export default function AdminPostsPage() {
             onClick={() => setFilter(tab.key as typeof filter)}
             className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
               filter === tab.key
-                ? 'bg-breezy-100 text-breezy-700'
-                : 'text-sand-600 hover:bg-sand-100'
+                ? 'bg-primary-100 text-primary-700'
+                : 'text-zinc-600 hover:bg-zinc-100'
             }`}
           >
             {tab.label} ({tab.count})
@@ -191,12 +191,12 @@ export default function AdminPostsPage() {
       </div>
 
       {/* Posts List */}
-      <div className="bg-white rounded-xl border border-sand-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-zinc-200 overflow-hidden">
         {loading ? (
-          <div className="p-8 text-center text-sand-500">Loading posts...</div>
+          <div className="p-8 text-center text-zinc-500">Loading posts...</div>
         ) : filteredPosts.length === 0 ? (
           <div className="p-8 text-center">
-            <p className="text-sand-500 mb-4">
+            <p className="text-zinc-500 mb-4">
               {filter === 'all'
                 ? 'No posts yet. Create your first post!'
                 : `No ${filter} posts found.`}
@@ -218,26 +218,26 @@ export default function AdminPostsPage() {
           </div>
         ) : (
           <table className="w-full">
-            <thead className="bg-sand-50 border-b border-sand-200">
+            <thead className="bg-zinc-50 border-b border-zinc-200">
               <tr>
-                <th className="text-left px-6 py-3 text-sm font-medium text-sand-600">Title</th>
-                <th className="text-left px-6 py-3 text-sm font-medium text-sand-600 hidden md:table-cell">Category</th>
-                <th className="text-left px-6 py-3 text-sm font-medium text-sand-600">Status</th>
-                <th className="text-left px-6 py-3 text-sm font-medium text-sand-600 hidden lg:table-cell">Source</th>
-                <th className="text-right px-6 py-3 text-sm font-medium text-sand-600">Actions</th>
+                <th className="text-left px-6 py-3 text-sm font-medium text-zinc-600">Title</th>
+                <th className="text-left px-6 py-3 text-sm font-medium text-zinc-600 hidden md:table-cell">Category</th>
+                <th className="text-left px-6 py-3 text-sm font-medium text-zinc-600">Status</th>
+                <th className="text-left px-6 py-3 text-sm font-medium text-zinc-600 hidden lg:table-cell">Source</th>
+                <th className="text-right px-6 py-3 text-sm font-medium text-zinc-600">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-sand-100">
+            <tbody className="divide-y divide-zinc-100">
               {filteredPosts.map((post) => (
-                <tr key={post.id} className="hover:bg-sand-50">
+                <tr key={post.id} className="hover:bg-zinc-50">
                   <td className="px-6 py-4">
                     <div>
-                      <p className="font-medium text-sand-900 line-clamp-1">{post.title}</p>
-                      <p className="text-sm text-sand-500 line-clamp-1">{post.slug}</p>
+                      <p className="font-medium text-zinc-900 line-clamp-1">{post.title}</p>
+                      <p className="text-sm text-zinc-500 line-clamp-1">{post.slug}</p>
                     </div>
                   </td>
                   <td className="px-6 py-4 hidden md:table-cell">
-                    <span className="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-sand-100 text-sand-700">
+                    <span className="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-zinc-100 text-zinc-700">
                       {post.category}
                     </span>
                   </td>
@@ -261,14 +261,14 @@ export default function AdminPostsPage() {
                         AI {post.quality_score && `(${post.quality_score}/10)`}
                       </span>
                     ) : (
-                      <span className="text-sm text-sand-500">Manual</span>
+                      <span className="text-sm text-zinc-500">Manual</span>
                     )}
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <Link href={`/admin/posts/${post.id}/edit`}>
                         <button
-                          className="p-2 text-sand-600 hover:text-breezy-600 hover:bg-breezy-50 rounded-lg transition-colors"
+                          className="p-2 text-zinc-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
                           title="Edit"
                         >
                           <PencilIcon className="w-4 h-4" />
@@ -276,7 +276,7 @@ export default function AdminPostsPage() {
                       </Link>
                       <button
                         onClick={() => deletePost(post.id, post.title)}
-                        className="p-2 text-sand-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                        className="p-2 text-zinc-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                         title="Delete"
                       >
                         <TrashIcon className="w-4 h-4" />

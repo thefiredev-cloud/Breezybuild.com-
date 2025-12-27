@@ -67,8 +67,8 @@ export default async function AnalyticsPage() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-sand-900">Analytics</h1>
-        <p className="text-sand-600 mt-1">
+        <h1 className="text-2xl font-bold text-zinc-900">Analytics</h1>
+        <p className="text-zinc-600 mt-1">
           Skills statistics and insights
         </p>
       </div>
@@ -101,19 +101,19 @@ export default async function AnalyticsPage() {
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Location Distribution */}
-        <div className="bg-white rounded-xl border border-sand-200 p-6">
-          <h2 className="text-lg font-semibold text-sand-900 mb-4">
+        <div className="bg-white rounded-xl border border-zinc-200 p-6">
+          <h2 className="text-lg font-semibold text-zinc-900 mb-4">
             Storage Location
           </h2>
           <div className="space-y-4">
             <div>
               <div className="flex justify-between text-sm mb-1">
-                <span className="text-sand-600">Global</span>
-                <span className="font-medium text-sand-900">
+                <span className="text-zinc-600">Global</span>
+                <span className="font-medium text-zinc-900">
                   {analytics.locationDistribution.global}
                 </span>
               </div>
-              <div className="h-3 bg-sand-100 rounded-full overflow-hidden">
+              <div className="h-3 bg-zinc-100 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-purple-500 rounded-full"
                   style={{
@@ -124,12 +124,12 @@ export default async function AnalyticsPage() {
             </div>
             <div>
               <div className="flex justify-between text-sm mb-1">
-                <span className="text-sand-600">Local</span>
-                <span className="font-medium text-sand-900">
+                <span className="text-zinc-600">Local</span>
+                <span className="font-medium text-zinc-900">
                   {analytics.locationDistribution.local}
                 </span>
               </div>
-              <div className="h-3 bg-sand-100 rounded-full overflow-hidden">
+              <div className="h-3 bg-zinc-100 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-blue-500 rounded-full"
                   style={{
@@ -142,8 +142,8 @@ export default async function AnalyticsPage() {
         </div>
 
         {/* Top Tags */}
-        <div className="bg-white rounded-xl border border-sand-200 p-6">
-          <h2 className="text-lg font-semibold text-sand-900 mb-4">
+        <div className="bg-white rounded-xl border border-zinc-200 p-6">
+          <h2 className="text-lg font-semibold text-zinc-900 mb-4">
             Top Tags
           </h2>
           {analytics.topTags.length > 0 ? (
@@ -151,12 +151,12 @@ export default async function AnalyticsPage() {
               {analytics.topTags.map(([tag, count]) => (
                 <div key={tag}>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-sand-600">{tag}</span>
-                    <span className="font-medium text-sand-900">{count}</span>
+                    <span className="text-zinc-600">{tag}</span>
+                    <span className="font-medium text-zinc-900">{count}</span>
                   </div>
-                  <div className="h-2 bg-sand-100 rounded-full overflow-hidden">
+                  <div className="h-2 bg-zinc-100 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-breezy-500 rounded-full"
+                      className="h-full bg-primary-500 rounded-full"
                       style={{
                         width: `${(count / analytics.topTags[0][1]) * 100}%`,
                       }}
@@ -166,14 +166,14 @@ export default async function AnalyticsPage() {
               ))}
             </div>
           ) : (
-            <p className="text-sand-500 text-center py-4">No tags yet</p>
+            <p className="text-zinc-500 text-center py-4">No tags yet</p>
           )}
         </div>
       </div>
 
       {/* Skills Over Time */}
-      <div className="bg-white rounded-xl border border-sand-200 p-6">
-        <h2 className="text-lg font-semibold text-sand-900 mb-4">
+      <div className="bg-white rounded-xl border border-zinc-200 p-6">
+        <h2 className="text-lg font-semibold text-zinc-900 mb-4">
           Skills Created Over Time
         </h2>
         {analytics.skillsByMonth.length > 0 ? (
@@ -184,10 +184,10 @@ export default async function AnalyticsPage() {
               return (
                 <div key={month} className="flex-1 flex flex-col items-center">
                   <div
-                    className="w-full bg-breezy-500 rounded-t"
+                    className="w-full bg-primary-500 rounded-t"
                     style={{ height: `${height}%`, minHeight: count > 0 ? '8px' : '0' }}
                   />
-                  <span className="text-xs text-sand-500 mt-2 rotate-45 origin-left">
+                  <span className="text-xs text-zinc-500 mt-2 rotate-45 origin-left">
                     {month.slice(5)}
                   </span>
                 </div>
@@ -195,7 +195,7 @@ export default async function AnalyticsPage() {
             })}
           </div>
         ) : (
-          <p className="text-sand-500 text-center py-8">No data yet</p>
+          <p className="text-zinc-500 text-center py-8">No data yet</p>
         )}
       </div>
     </div>

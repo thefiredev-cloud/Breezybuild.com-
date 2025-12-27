@@ -82,7 +82,7 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-gradient-hero">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-sand-200">
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-zinc-200">
         <div className="container-wide">
           <div className="flex items-center justify-between h-16">
             <Link href="/" className="flex items-center gap-2">
@@ -96,17 +96,17 @@ export default function PricingPage() {
                 />
               </div>
               <span className="text-xl font-bold">
-                <span className="text-breezy-600">Breezy</span>
-                <span className="text-sand-800">Build</span>
+                <span className="text-primary-600">Breezy</span>
+                <span className="text-zinc-800">Build</span>
               </span>
             </Link>
             <div className="flex items-center gap-4">
-              <Link href="/login" className="text-sand-600 hover:text-sand-900 text-sm font-medium">
+              <Link href="/login" className="text-zinc-600 hover:text-zinc-900 text-sm font-medium">
                 Login
               </Link>
               <Link
                 href="/login?signup=true"
-                className="px-4 py-2 bg-breezy-500 text-white text-sm font-semibold rounded-lg hover:bg-breezy-600 transition-colors"
+                className="px-4 py-2 bg-primary-500 text-white text-sm font-semibold rounded-lg hover:bg-primary-600 transition-colors"
               >
                 Sign Up
               </Link>
@@ -118,10 +118,10 @@ export default function PricingPage() {
       <main className="container-wide py-16">
         {/* Hero */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-sand-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-zinc-900 mb-4">
             Simple, Transparent Pricing
           </h1>
-          <p className="text-xl text-sand-600 max-w-2xl mx-auto">
+          <p className="text-xl text-zinc-600 max-w-2xl mx-auto">
             Unlock the full archive of AI dev tool research. Cancel anytime.
           </p>
         </div>
@@ -133,32 +133,32 @@ export default function PricingPage() {
               key={plan.name}
               className={`relative rounded-2xl p-8 ${
                 plan.highlighted
-                  ? 'bg-gradient-to-br from-breezy-500 to-warm-500 text-white shadow-xl scale-105'
-                  : 'bg-white border border-sand-200 shadow-sm'
+                  ? 'bg-gradient-to-br from-primary-500 to-warm-500 text-white shadow-xl scale-105'
+                  : 'bg-white border border-zinc-200 shadow-sm'
               }`}
             >
               {plan.highlighted && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="bg-sand-900 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                  <span className="bg-zinc-900 text-white text-xs font-semibold px-3 py-1 rounded-full">
                     Most Popular
                   </span>
                 </div>
               )}
 
               <div className="mb-6">
-                <h3 className={`text-xl font-bold mb-2 ${plan.highlighted ? 'text-white' : 'text-sand-900'}`}>
+                <h3 className={`text-xl font-bold mb-2 ${plan.highlighted ? 'text-white' : 'text-zinc-900'}`}>
                   {plan.name}
                 </h3>
-                <p className={`text-sm ${plan.highlighted ? 'text-white/80' : 'text-sand-600'}`}>
+                <p className={`text-sm ${plan.highlighted ? 'text-white/80' : 'text-zinc-600'}`}>
                   {plan.description}
                 </p>
               </div>
 
               <div className="mb-6">
-                <span className={`text-4xl font-bold ${plan.highlighted ? 'text-white' : 'text-sand-900'}`}>
+                <span className={`text-4xl font-bold ${plan.highlighted ? 'text-white' : 'text-zinc-900'}`}>
                   {plan.price}
                 </span>
-                <span className={plan.highlighted ? 'text-white/80' : 'text-sand-600'}>
+                <span className={plan.highlighted ? 'text-white/80' : 'text-zinc-600'}>
                   {plan.period}
                 </span>
               </div>
@@ -166,8 +166,8 @@ export default function PricingPage() {
               <ul className="space-y-3 mb-8">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3">
-                    <CheckIcon className={`w-5 h-5 flex-shrink-0 ${plan.highlighted ? 'text-white' : 'text-breezy-500'}`} />
-                    <span className={`text-sm ${plan.highlighted ? 'text-white/90' : 'text-sand-700'}`}>
+                    <CheckIcon className={`w-5 h-5 flex-shrink-0 ${plan.highlighted ? 'text-white' : 'text-primary-500'}`} />
+                    <span className={`text-sm ${plan.highlighted ? 'text-white/90' : 'text-zinc-700'}`}>
                       {feature}
                     </span>
                   </li>
@@ -179,8 +179,8 @@ export default function PricingPage() {
                 disabled={loadingTier !== null}
                 className={`block w-full py-3 px-4 text-center font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
                   plan.highlighted
-                    ? 'bg-white text-breezy-600 hover:bg-sand-50'
-                    : 'bg-breezy-500 text-white hover:bg-breezy-600'
+                    ? 'bg-white text-primary-600 hover:bg-zinc-50'
+                    : 'bg-primary-500 text-white hover:bg-primary-600'
                 }`}
               >
                 {loadingTier === plan.tier ? 'Loading...' : 'Get Started'}
@@ -191,25 +191,25 @@ export default function PricingPage() {
 
         {/* FAQ Section */}
         <div className="mt-20 max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-sand-900 text-center mb-8">
+          <h2 className="text-2xl font-bold text-zinc-900 text-center mb-8">
             Frequently Asked Questions
           </h2>
           <div className="space-y-6">
-            <div className="bg-white rounded-xl p-6 border border-sand-200">
-              <h3 className="font-semibold text-sand-900 mb-2">What do I get with a subscription?</h3>
-              <p className="text-sand-600 text-sm">
+            <div className="bg-white rounded-xl p-6 border border-zinc-200">
+              <h3 className="font-semibold text-zinc-900 mb-2">What do I get with a subscription?</h3>
+              <p className="text-zinc-600 text-sm">
                 Access to our full archive of AI dev tool research, including detailed analysis, scores, business fit metrics, and daily updates on the best tools for non-technical founders.
               </p>
             </div>
-            <div className="bg-white rounded-xl p-6 border border-sand-200">
-              <h3 className="font-semibold text-sand-900 mb-2">Can I cancel anytime?</h3>
-              <p className="text-sand-600 text-sm">
+            <div className="bg-white rounded-xl p-6 border border-zinc-200">
+              <h3 className="font-semibold text-zinc-900 mb-2">Can I cancel anytime?</h3>
+              <p className="text-zinc-600 text-sm">
                 Yes! You can cancel your subscription at any time. You&apos;ll continue to have access until the end of your billing period.
               </p>
             </div>
-            <div className="bg-white rounded-xl p-6 border border-sand-200">
-              <h3 className="font-semibold text-sand-900 mb-2">Is today&apos;s Tool of the Day free?</h3>
-              <p className="text-sand-600 text-sm">
+            <div className="bg-white rounded-xl p-6 border border-zinc-200">
+              <h3 className="font-semibold text-zinc-900 mb-2">Is today&apos;s Tool of the Day free?</h3>
+              <p className="text-zinc-600 text-sm">
                 Yes! The current day&apos;s Tool of the Day is always free for everyone. A subscription unlocks access to the full archive of past research.
               </p>
             </div>
@@ -218,9 +218,9 @@ export default function PricingPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-sand-900 text-white py-12 mt-16">
+      <footer className="bg-zinc-900 text-white py-12 mt-16">
         <div className="container-wide text-center">
-          <p className="text-sand-400 text-sm">
+          <p className="text-zinc-400 text-sm">
             &copy; {new Date().getFullYear()} BreezyBuild. Build with AI, ship with confidence.
           </p>
         </div>

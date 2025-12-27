@@ -35,8 +35,8 @@ export default async function EditSkillPage({ params }: PageProps) {
   return (
     <div className="max-w-4xl">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-sand-900">Edit Skill</h1>
-        <p className="text-sand-600 mt-1">
+        <h1 className="text-2xl font-bold text-zinc-900">Edit Skill</h1>
+        <p className="text-zinc-600 mt-1">
           Editing: {skill.name}
         </p>
       </div>

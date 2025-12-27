@@ -69,8 +69,8 @@ export default async function PostPage({ params }: PostPageProps) {
     <main className="container-wide py-12">
       {isToday && (
         <div className="text-center mb-8">
-          <span className="inline-flex items-center gap-2 text-sm font-medium text-breezy-600 bg-breezy-50 px-3 py-1 rounded-full">
-            <span className="w-2 h-2 bg-breezy-500 rounded-full animate-pulse" />
+          <span className="inline-flex items-center gap-2 text-sm font-medium text-primary-600 bg-primary-50 px-3 py-1 rounded-full">
+            <span className="w-2 h-2 bg-primary-500 rounded-full animate-pulse" />
             Today&apos;s Post
           </span>
         </div>

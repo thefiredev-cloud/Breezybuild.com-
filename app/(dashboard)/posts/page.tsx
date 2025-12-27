@@ -22,8 +22,8 @@ export default async function PostsPage() {
       {post ? (
         <>
           <div className="text-center mb-8">
-            <span className="inline-flex items-center gap-2 text-sm font-medium text-breezy-600 bg-breezy-50 px-3 py-1 rounded-full">
-              <span className="w-2 h-2 bg-breezy-500 rounded-full animate-pulse" />
+            <span className="inline-flex items-center gap-2 text-sm font-medium text-primary-600 bg-primary-50 px-3 py-1 rounded-full">
+              <span className="w-2 h-2 bg-primary-500 rounded-full animate-pulse" />
               Today&apos;s Post
             </span>
           </div>
@@ -31,10 +31,10 @@ export default async function PostsPage() {
         </>
       ) : (
         <div className="text-center py-16">
-          <h2 className="text-2xl font-bold text-sand-900 mb-4">
+          <h2 className="text-2xl font-bold text-zinc-900 mb-4">
             No posts yet
           </h2>
-          <p className="text-sand-600 mb-8">
+          <p className="text-zinc-600 mb-8">
             Check back soon for the first daily insight!
           </p>
           <Link href="/dashboard">

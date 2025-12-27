@@ -36,7 +36,7 @@ export default async function AccountPage() {
 
   return (
     <main className="container-tight py-8 px-4">
-      <h1 className="text-2xl md:text-3xl font-bold text-sand-900 mb-8">
+      <h1 className="text-2xl md:text-3xl font-bold text-zinc-900 mb-8">
         Account Settings
       </h1>
 

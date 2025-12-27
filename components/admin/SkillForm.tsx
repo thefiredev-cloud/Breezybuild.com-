@@ -223,8 +223,8 @@ export function SkillForm({ skill, mode }: SkillFormProps) {
 
       <TabPanel tabId="edit" activeTab={activeTab} className="space-y-6">
         {/* Basic Info */}
-        <div className="bg-white rounded-xl border border-sand-200 p-6 space-y-4">
-          <h3 className="font-semibold text-sand-900">Basic Information</h3>
+        <div className="bg-white rounded-xl border border-zinc-200 p-6 space-y-4">
+          <h3 className="font-semibold text-zinc-900">Basic Information</h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Input
@@ -257,8 +257,8 @@ export function SkillForm({ skill, mode }: SkillFormProps) {
         </div>
 
         {/* Allowed Tools */}
-        <div className="bg-white rounded-xl border border-sand-200 p-6 space-y-4">
-          <h3 className="font-semibold text-sand-900">Allowed Tools</h3>
+        <div className="bg-white rounded-xl border border-zinc-200 p-6 space-y-4">
+          <h3 className="font-semibold text-zinc-900">Allowed Tools</h3>
           <MultiSelect
             options={toolOptions}
             value={formData.allowed_tools}
@@ -268,8 +268,8 @@ export function SkillForm({ skill, mode }: SkillFormProps) {
         </div>
 
         {/* Tags */}
-        <div className="bg-white rounded-xl border border-sand-200 p-6 space-y-4">
-          <h3 className="font-semibold text-sand-900">Tags</h3>
+        <div className="bg-white rounded-xl border border-zinc-200 p-6 space-y-4">
+          <h3 className="font-semibold text-zinc-900">Tags</h3>
           <div className="flex gap-2">
             <Input
               placeholder="Add a tag..."
@@ -291,7 +291,7 @@ export function SkillForm({ skill, mode }: SkillFormProps) {
               {formData.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="inline-flex items-center gap-1 px-3 py-1 bg-sand-100 text-sand-700 rounded-full text-sm"
+                  className="inline-flex items-center gap-1 px-3 py-1 bg-zinc-100 text-zinc-700 rounded-full text-sm"
                 >
                   {tag}
                   <button
@@ -308,9 +308,9 @@ export function SkillForm({ skill, mode }: SkillFormProps) {
         </div>
 
         {/* Content Sections */}
-        <div className="bg-white rounded-xl border border-sand-200 p-6 space-y-4">
+        <div className="bg-white rounded-xl border border-zinc-200 p-6 space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="font-semibold text-sand-900">Content Sections</h3>
+            <h3 className="font-semibold text-zinc-900">Content Sections</h3>
             <Button type="button" variant="secondary" size="sm" onClick={addSection}>
               + Add Section
             </Button>
@@ -322,10 +322,10 @@ export function SkillForm({ skill, mode }: SkillFormProps) {
               .map((section, index) => (
                 <div
                   key={section.id}
-                  className="border border-sand-200 rounded-lg p-4 space-y-3"
+                  className="border border-zinc-200 rounded-lg p-4 space-y-3"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-sand-500 w-6">{index + 1}.</span>
+                    <span className="text-sm text-zinc-500 w-6">{index + 1}.</span>
                     <Input
                       value={section.title}
                       onChange={(e) => updateSection(section.id, { title: e.target.value })}
@@ -365,7 +365,7 @@ export function SkillForm({ skill, mode }: SkillFormProps) {
       </TabPanel>
 
       {/* Actions */}
-      <div className="flex items-center justify-between pt-4 border-t border-sand-200">
+      <div className="flex items-center justify-between pt-4 border-t border-zinc-200">
         <Button
           type="button"
           variant="ghost"

@@ -24,7 +24,7 @@ export default async function EditPostPage({ params }: EditPostPageProps) {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-sand-900 mb-8">Edit Post</h1>
+      <h1 className="text-2xl font-bold text-zinc-900 mb-8">Edit Post</h1>
       <PostForm post={post} mode="edit" />
     </div>
   );

@@ -59,8 +59,8 @@ export default async function DailyPage() {
   return (
     <main className="container-wide py-12">
       <div className="text-center mb-8">
-        <span className="inline-flex items-center gap-2 text-sm font-medium text-breezy-600 bg-breezy-50 px-3 py-1 rounded-full">
-          <span className="w-2 h-2 bg-breezy-500 rounded-full animate-pulse" />
+        <span className="inline-flex items-center gap-2 text-sm font-medium text-primary-600 bg-primary-50 px-3 py-1 rounded-full">
+          <span className="w-2 h-2 bg-primary-500 rounded-full animate-pulse" />
           The Daily
         </span>
       </div>
@@ -73,16 +73,16 @@ export default async function DailyPage() {
         </div>
       ) : (
         <div className="text-center py-16 max-w-md mx-auto">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-breezy-100 flex items-center justify-center">
-            <svg className="w-8 h-8 text-breezy-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary-100 flex items-center justify-center">
+            <svg className="w-8 h-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                     d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-sand-900 mb-4">
+          <h2 className="text-2xl font-bold text-zinc-900 mb-4">
             No research yet today
           </h2>
-          <p className="text-sand-600">
+          <p className="text-zinc-600">
             Today&apos;s AI dev tool research is being prepared. Check back soon!
           </p>
         </div>

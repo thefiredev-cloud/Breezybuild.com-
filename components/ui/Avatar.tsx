@@ -25,7 +25,7 @@ export function Avatar({ src, name, email, size = 'md', className = '' }: Avatar
 
   const getColor = (initials: string) => {
     const colors = [
-      'bg-breezy-500',
+      'bg-primary-500',
       'bg-warm-500',
       'bg-emerald-500',
       'bg-blue-500',

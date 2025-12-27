@@ -98,8 +98,8 @@ export default async function AdminDashboardPage() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-sand-900">Dashboard</h1>
-        <p className="text-sand-600 mt-1">
+        <h1 className="text-2xl font-bold text-zinc-900">Dashboard</h1>
+        <p className="text-zinc-600 mt-1">
           Overview of your Breezybuild admin
         </p>
       </div>
@@ -133,8 +133,8 @@ export default async function AdminDashboardPage() {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-xl border border-sand-200 p-6">
-        <h2 className="text-lg font-semibold text-sand-900 mb-4">Quick Actions</h2>
+      <div className="bg-white rounded-xl border border-zinc-200 p-6">
+        <h2 className="text-lg font-semibold text-zinc-900 mb-4">Quick Actions</h2>
         <div className="flex flex-wrap gap-3">
           <Link href="/admin/skills/new">
             <Button size="sm">
@@ -160,31 +160,31 @@ export default async function AdminDashboardPage() {
       {/* Recent Items */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Skills */}
-        <div className="bg-white rounded-xl border border-sand-200 overflow-hidden">
-          <div className="px-6 py-4 border-b border-sand-200 flex items-center justify-between">
-            <h2 className="font-semibold text-sand-900">Recent Skills</h2>
+        <div className="bg-white rounded-xl border border-zinc-200 overflow-hidden">
+          <div className="px-6 py-4 border-b border-zinc-200 flex items-center justify-between">
+            <h2 className="font-semibold text-zinc-900">Recent Skills</h2>
             <Link
               href="/admin/skills"
-              className="text-sm text-breezy-600 hover:text-breezy-700"
+              className="text-sm text-primary-600 hover:text-primary-700"
             >
               View all
             </Link>
           </div>
           {recentSkills.length > 0 ? (
-            <ul className="divide-y divide-sand-100">
+            <ul className="divide-y divide-zinc-100">
               {recentSkills.map((skill) => (
-                <li key={skill.id} className="px-6 py-3 hover:bg-sand-50">
+                <li key={skill.id} className="px-6 py-3 hover:bg-zinc-50">
                   <Link
                     href={`/admin/skills/${skill.slug}/edit`}
                     className="flex items-center justify-between"
                   >
                     <div>
-                      <p className="font-medium text-sand-900">{skill.name}</p>
-                      <p className="text-sm text-sand-500">
+                      <p className="font-medium text-zinc-900">{skill.name}</p>
+                      <p className="text-sm text-zinc-500">
                         {skill.storage_location === 'global' ? 'Global' : 'Local'}
                       </p>
                     </div>
-                    <span className="text-xs text-sand-400">
+                    <span className="text-xs text-zinc-400">
                       {new Date(skill.created_at).toLocaleDateString()}
                     </span>
                   </Link>
@@ -192,38 +192,38 @@ export default async function AdminDashboardPage() {
               ))}
             </ul>
           ) : (
-            <div className="px-6 py-8 text-center text-sand-500">
+            <div className="px-6 py-8 text-center text-zinc-500">
               No skills yet
             </div>
           )}
         </div>
 
         {/* Recent Posts */}
-        <div className="bg-white rounded-xl border border-sand-200 overflow-hidden">
-          <div className="px-6 py-4 border-b border-sand-200 flex items-center justify-between">
-            <h2 className="font-semibold text-sand-900">Recent Posts</h2>
+        <div className="bg-white rounded-xl border border-zinc-200 overflow-hidden">
+          <div className="px-6 py-4 border-b border-zinc-200 flex items-center justify-between">
+            <h2 className="font-semibold text-zinc-900">Recent Posts</h2>
             <Link
               href="/admin/posts"
-              className="text-sm text-breezy-600 hover:text-breezy-700"
+              className="text-sm text-primary-600 hover:text-primary-700"
             >
               View all
             </Link>
           </div>
           {recentPosts.length > 0 ? (
-            <ul className="divide-y divide-sand-100">
+            <ul className="divide-y divide-zinc-100">
               {recentPosts.map((post) => (
-                <li key={post.id} className="px-6 py-3 hover:bg-sand-50">
+                <li key={post.id} className="px-6 py-3 hover:bg-zinc-50">
                   <Link
                     href={`/admin/posts/${post.id}/edit`}
                     className="flex items-center justify-between"
                   >
                     <div>
-                      <p className="font-medium text-sand-900">{post.title}</p>
-                      <p className="text-sm text-sand-500">
+                      <p className="font-medium text-zinc-900">{post.title}</p>
+                      <p className="text-sm text-zinc-500">
                         {post.is_published ? 'Published' : 'Draft'}
                       </p>
                     </div>
-                    <span className="text-xs text-sand-400">
+                    <span className="text-xs text-zinc-400">
                       {new Date(post.created_at).toLocaleDateString()}
                     </span>
                   </Link>
@@ -231,7 +231,7 @@ export default async function AdminDashboardPage() {
               ))}
             </ul>
           ) : (
-            <div className="px-6 py-8 text-center text-sand-500">
+            <div className="px-6 py-8 text-center text-zinc-500">
               No posts yet
             </div>
           )}

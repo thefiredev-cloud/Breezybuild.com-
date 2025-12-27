@@ -124,8 +124,8 @@ export default async function HomePage() {
             nextDate={null}
           />
           <div className="text-center py-16">
-            <h2 className="text-2xl font-bold text-sand-900 mb-4">Coming Soon</h2>
-            <p className="text-sand-600">Our first Tool of the Day will be published shortly.</p>
+            <h2 className="text-2xl font-bold text-zinc-900 mb-4">Coming Soon</h2>
+            <p className="text-zinc-600">Our first Tool of the Day will be published shortly.</p>
           </div>
         </main>
         <FooterSection />

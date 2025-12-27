@@ -33,8 +33,8 @@ export default function Error({
             sizes="40px"
           />
         </div>
-        <span className="text-2xl font-bold text-sand-900">
-          Breezy<span className="text-breezy-500">Build</span>
+        <span className="text-2xl font-bold text-zinc-900">
+          Breezy<span className="text-primary-500">Build</span>
         </span>
       </div>
 
@@ -56,10 +56,10 @@ export default function Error({
           </svg>
         </div>
 
-        <h1 className="text-2xl font-semibold text-sand-900 mb-4">
+        <h1 className="text-2xl font-semibold text-zinc-900 mb-4">
           Something went wrong
         </h1>
-        <p className="text-sand-600 mb-8">
+        <p className="text-zinc-600 mb-8">
           We hit a snag loading this page. Don&apos;t worry - these things happen.
           Try again or head back home.
         </p>
@@ -74,7 +74,7 @@ export default function Error({
           </button>
           <Link
             href="/"
-            className="px-6 py-3 bg-white text-breezy-600 font-semibold rounded-xl border-2 border-breezy-200 hover:border-breezy-400 transition-all duration-200"
+            className="px-6 py-3 bg-white text-primary-600 font-semibold rounded-xl border-2 border-primary-200 hover:border-primary-400 transition-all duration-200"
           >
             Back to Home
           </Link>
@@ -84,11 +84,11 @@ export default function Error({
       {/* Error Details (dev mode) */}
       {process.env.NODE_ENV === 'development' && error.message && (
         <div className="mt-8 max-w-lg w-full">
-          <details className="bg-sand-100 rounded-lg p-4">
-            <summary className="text-sm font-medium text-sand-700 cursor-pointer">
+          <details className="bg-zinc-100 rounded-lg p-4">
+            <summary className="text-sm font-medium text-zinc-700 cursor-pointer">
               Error Details (dev only)
             </summary>
-            <pre className="mt-2 text-xs text-sand-600 overflow-auto max-h-40">
+            <pre className="mt-2 text-xs text-zinc-600 overflow-auto max-h-40">
               {error.message}
               {error.digest && `\nDigest: ${error.digest}`}
             </pre>

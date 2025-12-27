@@ -18,16 +18,16 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="min-h-screen bg-sand-50">
+    <div className="min-h-screen bg-zinc-50">
       {/* Sidebar Navigation */}
       <Sidebar />
 
       {/* Main Content */}
       <div className="lg:pl-64">
         {/* Top bar with user info */}
-        <header className="bg-white border-b border-sand-200 px-4 lg:px-8 py-4">
+        <header className="bg-white border-b border-zinc-200 px-4 lg:px-8 py-4">
           <div className="flex items-center justify-end">
-            <span className="text-sm text-sand-600">{user.email}</span>
+            <span className="text-sm text-zinc-600">{user.email}</span>
           </div>
         </header>
 

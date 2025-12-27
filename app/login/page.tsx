@@ -63,14 +63,14 @@ export default function LoginPage() {
                 sizes="40px"
               />
             </div>
-            <span className="text-2xl font-bold text-sand-900">
-              Breezy<span className="text-breezy-500">Build</span>
+            <span className="text-2xl font-bold text-zinc-900">
+              Breezy<span className="text-primary-500">Build</span>
             </span>
           </div>
-          <h1 className="text-2xl font-bold text-sand-900">
+          <h1 className="text-2xl font-bold text-zinc-900">
             {mode === 'login' ? 'Welcome back' : 'Create your account'}
           </h1>
-          <p className="text-sand-600 mt-2">
+          <p className="text-zinc-600 mt-2">
             {mode === 'login'
               ? 'Sign in to access your daily insights'
               : 'Join thousands of builders shipping with AI'}
@@ -117,12 +117,12 @@ export default function LoginPage() {
 
         {/* Toggle mode */}
         <div className="mt-6 text-center">
-          <p className="text-sand-600">
+          <p className="text-zinc-600">
             {mode === 'login' ? "Don't have an account?" : 'Already have an account?'}
             <button
               type="button"
               onClick={() => setMode(mode === 'login' ? 'signup' : 'login')}
-              className="ml-2 text-breezy-600 font-medium hover:text-breezy-700"
+              className="ml-2 text-primary-600 font-medium hover:text-primary-700"
             >
               {mode === 'login' ? 'Sign up' : 'Sign in'}
             </button>
@@ -131,7 +131,7 @@ export default function LoginPage() {
 
         {/* Back to home */}
         <div className="mt-4 text-center">
-          <a href="/" className="text-sm text-sand-500 hover:text-sand-700">
+          <a href="/" className="text-sm text-zinc-500 hover:text-zinc-700">
             Back to home
           </a>
         </div>
